@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plan Integral de Salud</title>
+  <link rel="icon" href="images/logo-icono-transparente.png" />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:wght@400;500&display=swap"
     rel="stylesheet">
@@ -732,7 +733,10 @@
 
   <!-- HEADER -->
   <div class="header">
-    <div class="header-avatar">J</div>
+    <div class="header-avatar">
+      <img src="images/logo-icono.png" alt="Logo"
+        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+    </div>
     <div class="header-info">
       <h1>Plan Integral de Salud</h1>
       <p>41 años · 177 cm · Inicio: 114 kg · Meta: 80 kg · Costa Rica</p>
@@ -782,6 +786,18 @@
         <div class="metric">
           <div class="metric-val">5 pm</div>
           <div class="metric-lbl">hora ideal (post trabajo)</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.5rem">
+        <div class="label" style="margin-bottom:8px">Seleccionar fase actual</div>
+        <div class="sub-tabs" id="ejercicio-tabs">
+          <button id="btn-ejercicio-1" class="sub-tab" onclick="window._filterEjercicioFase(1, this)">Fase 1 — Despertar
+            el cuerpo</button>
+          <button id="btn-ejercicio-2" class="sub-tab" onclick="window._filterEjercicioFase(2, this)">Fase 2 —
+            Aumentando carga</button>
+          <button id="btn-ejercicio-3" class="sub-tab" onclick="window._filterEjercicioFase(3, this)">Fase 3 —
+            Mantenimiento</button>
         </div>
       </div>
 
@@ -1931,6 +1947,54 @@
         margin-bottom: 1rem
       }
 
+      .report-filters {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 1.25rem;
+        flex-wrap: wrap;
+      }
+
+      .report-filter-btn {
+        padding: 5px 12px;
+        border-radius: 16px;
+        border: 1px solid var(--border2);
+        background: var(--surface2);
+        color: var(--text3);
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+
+      .report-filter-btn.active {
+        background: var(--g800);
+        color: var(--surface);
+        border-color: var(--g800);
+      }
+
+      .day-shortcuts {
+        display: flex;
+        gap: 6px;
+        margin-top: 4px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .day-shortcut {
+        font-size: 11px;
+        cursor: pointer;
+        opacity: 1;
+        background: var(--surface2);
+        padding: 3px 6px;
+        border-radius: 8px;
+        transition: all 0.15s;
+        text-decoration: none;
+      }
+
+      .day-shortcut:hover {
+        background: var(--border2);
+      }
+
       .report-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -2576,6 +2640,7 @@
     // Initial render of first menu
     document.addEventListener('DOMContentLoaded', () => {
       renderMenu('f1a');
+      if (window._filterEjercicioFase) window._filterEjercicioFase(1);
     });
   </script>
 
@@ -2659,6 +2724,74 @@
       renderCalendar();
     }
 
+    window._currentMonthKey = '';
+    window._jumpMonth = function (mKey) {
+      window._currentMonthKey = mKey;
+      for (let w = 0; w < CAL_WEEKS; w++) {
+        const wDate = weekStart(w);
+        if (wDate.getFullYear() + '-' + wDate.getMonth() === mKey) {
+          currentWeek = w;
+          break;
+        }
+      }
+      renderCalendar();
+    };
+
+    window._currentReportFilter = 'all';
+    window._setReportFilter = function (f) {
+      window._currentReportFilter = f;
+      renderCalendar();
+    };
+
+    window._filterEjercicioFase = function (fase, btn) {
+      if (!btn) btn = document.getElementById('btn-ejercicio-' + fase);
+      const group = document.getElementById('ejercicio-tabs');
+      if (group && btn) {
+        group.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+
+      document.querySelectorAll('#ejercicio .phase-card').forEach((card, i) => {
+        if (i + 1 === fase) {
+          card.style.display = 'block';
+          const body = card.querySelector('.phase-body');
+          if (body && !body.classList.contains('open')) body.classList.add('open');
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    };
+
+    window._jumpToModule = function (module, weekIndex, dayIndex) {
+      if (module === 'menu') {
+        const navBtn = document.querySelector('.main-nav-btn[onclick*="menu"]');
+        if (navBtn) navBtn.click();
+
+        let phaseId = '';
+        if (weekIndex < 4) phaseId = (weekIndex % 2 === 0) ? 'f1a' : 'f1b';
+        else if (weekIndex < 10) phaseId = ((weekIndex - 4) % 2 === 0) ? 'f2a' : 'f2b';
+        else phaseId = ((weekIndex - 10) % 2 === 0) ? 'f3a' : 'f3b';
+
+        const phaseBtn = document.querySelector('button[onclick*="' + phaseId + '"]');
+        if (phaseBtn) phaseBtn.click();
+
+        setTimeout(() => {
+          const dayBtn = document.querySelector('#dt-' + phaseId + ' > button:nth-child(' + (dayIndex + 1) + ')');
+          if (dayBtn) dayBtn.click();
+        }, 50);
+
+      } else if (module === 'ejercicio') {
+        const navBtn = document.querySelector('.main-nav-btn[onclick*="ejercicio"]');
+        if (navBtn) navBtn.click();
+
+        const phaseNum = weekIndex < 4 ? 1 : (weekIndex < 10 ? 2 : 3);
+        const btn = document.getElementById('btn-ejercicio-' + phaseNum);
+        if (btn) {
+          window._filterEjercicioFase(phaseNum, btn);
+        }
+      }
+    };
+
     function renderCalendar() {
       const section = document.getElementById('calendario');
       if (!section || !calLoaded) return;
@@ -2672,18 +2805,44 @@
       const ws = weekStart(currentWeek);
       const phase = getPhase(currentWeek);
 
-      let jumpHTML = '<select class="week-jump-select" onchange="window._jumpWeek(parseInt(this.value))">';
+      // Build Month/Week Data Structure
+      const monthMap = {};
+      const monthKeys = [];
       for (let w = 0; w < CAL_WEEKS; w++) {
         const wDate = weekStart(w);
+        const mKey = wDate.getFullYear() + '-' + wDate.getMonth();
+        if (!monthMap[mKey]) {
+          const mName = wDate.toLocaleDateString('es-CR', { month: 'long', year: 'numeric' });
+          monthMap[mKey] = { name: mName.charAt(0).toUpperCase() + mName.slice(1), weeks: [] };
+          monthKeys.push(mKey);
+        }
         let hasData = false;
         for (let d = 0; d < 7 && !hasData; d++) {
           const dd = new Date(wDate); dd.setDate(dd.getDate() + d);
           if (getDayScore(ds(dd)) > 0) hasData = true;
         }
-        const isCur = w === currentWeek;
-        jumpHTML += `<option value="${w}" ${isCur ? 'selected' : ''}>Semana ${w + 1}${hasData && !isCur ? ' (con datos)' : ''}</option>`;
+        monthMap[mKey].weeks.push({ w, hasData });
       }
+
+      if (!window._currentMonthKey) {
+        const curD = weekStart(currentWeek);
+        window._currentMonthKey = curD.getFullYear() + '-' + curD.getMonth();
+      }
+
+      // Render Dropdown and Sub-tabs
+      let jumpHTML = '<div style="margin-bottom:1rem;"><select class="week-jump-select" style="width:100%;margin-bottom:12px" onchange="window._jumpMonth(this.value)">';
+      monthKeys.forEach((k) => {
+        const isCurMonth = k === window._currentMonthKey;
+        jumpHTML += `<option value="${k}" ${isCurMonth ? 'selected' : ''}>${monthMap[k].name}</option>`;
+      });
       jumpHTML += '</select>';
+
+      jumpHTML += '<div class="sub-tabs" style="margin-bottom:0">';
+      monthMap[window._currentMonthKey].weeks.forEach((wk) => {
+        const isWkCur = wk.w === currentWeek;
+        jumpHTML += `<button class="sub-tab${isWkCur ? ' active' : ''}" onclick="window._jumpWeek(${wk.w})">Semana ${wk.w + 1}${wk.hasData && !isWkCur ? ' •' : ''}</button>`;
+      });
+      jumpHTML += '</div></div>';
 
       let daysHTML = '<div class="week-grid">';
       for (let d = 0; d < 7; d++) {
@@ -2704,39 +2863,69 @@
         daysHTML += `<div class="day-cell ${isFuture ? 'future-day' : ''} ${isToday ? 'today-cell' : ''}">
           <div class="day-cell-header" title="${formatDate(day)}">${day.getDate()} ${DAY_NAMES[d].charAt(0)}</div>
           <div class="day-cell-dots">${dotsHTML}</div>
+          <div class="day-shortcuts">
+            <span class="day-shortcut" title="Ir al menú de este día" onclick="window._jumpToModule('menu', ${currentWeek}, ${d})">📋</span>
+            <span class="day-shortcut" title="Ir a la rutina de esta fase" onclick="window._jumpToModule('ejercicio', ${currentWeek}, ${d})">👟</span>
+          </div>
         </div>`;
       }
       daysHTML += '</div>';
 
-      let totalDaysPast = Math.max(0, diffDays + 1);
+      let totalDaysTarget = Math.max(0, diffDays + 1);
       if (calData && Object.keys(calData).length > 0) {
         Object.keys(calData).forEach(dateStr => {
           const parts = dateStr.split('-');
           if (parts.length === 3) {
             const d = new Date(parts[0], parts[1] - 1, parts[2]);
             const offset = Math.floor((d - CAL_START) / 86400000);
-            if (offset + 1 > totalDaysPast) totalDaysPast = offset + 1;
+            if (offset + 1 > totalDaysTarget) totalDaysTarget = offset + 1;
           }
         });
       }
-      totalDaysPast = Math.min(CAL_WEEKS * 7, Math.max(1, totalDaysPast));
+      totalDaysTarget = Math.min(CAL_WEEKS * 7, Math.max(1, totalDaysTarget));
+
+      let startOffset = 0;
+      let endOffset = totalDaysTarget;
+
+      if (window._currentReportFilter === 'today') {
+        startOffset = diffDays;
+        endOffset = diffDays + 1;
+      } else if (window._currentReportFilter === 'week') {
+        startOffset = currentWeek * 7;
+        endOffset = startOffset + 7;
+      } else if (window._currentReportFilter === 'month') {
+        startOffset = Math.max(0, diffDays - 29);
+        endOffset = diffDays + 1;
+      }
+      endOffset = Math.min(CAL_WEEKS * 7, Math.max(1, endOffset));
+      startOffset = Math.max(0, startOffset);
+      const calcDays = endOffset > startOffset ? endOffset - startOffset : 0;
+
       let completedChecks = 0, perfectDays = 0;
-      for (let d = 0; d < totalDaysPast; d++) {
+      for (let d = startOffset; d < endOffset; d++) {
         const day = new Date(CAL_START); day.setDate(day.getDate() + d);
         const s = getDayScore(ds(day));
         completedChecks += s;
         if (s === HABITS.length) perfectDays++;
       }
-      const totalChecks = totalDaysPast * HABITS.length;
+      const totalChecks = calcDays * HABITS.length;
       const pct = totalChecks > 0 ? Math.round(completedChecks / totalChecks * 100) : 0;
       const habitTotals = HABITS.map((h, i) => {
         let cnt = 0;
-        for (let d = 0; d < totalDaysPast; d++) {
+        for (let d = startOffset; d < endOffset; d++) {
           const day = new Date(CAL_START); day.setDate(day.getDate() + d);
           if (getCheck(ds(day), h)) cnt++;
         }
-        return { h, icon: HABIT_ICONS[i], cnt, pct: totalDaysPast > 0 ? Math.round(cnt / totalDaysPast * 100) : 0 };
+        return { h, icon: HABIT_ICONS[i], cnt, pct: calcDays > 0 ? Math.round(cnt / calcDays * 100) : 0 };
       });
+
+      const filterHTML = `
+        <div class="report-filters">
+          <button class="report-filter-btn ${window._currentReportFilter === 'today' ? 'active' : ''}" onclick="window._setReportFilter('today')">Día</button>
+          <button class="report-filter-btn ${window._currentReportFilter === 'week' ? 'active' : ''}" onclick="window._setReportFilter('week')">Semana</button>
+          <button class="report-filter-btn ${window._currentReportFilter === 'month' ? 'active' : ''}" onclick="window._setReportFilter('month')">Mes</button>
+          <button class="report-filter-btn ${window._currentReportFilter === 'all' ? 'active' : ''}" onclick="window._setReportFilter('all')">Completo</button>
+        </div>`;
 
       section.innerHTML = `
     <div class="section-title">Calendario de seguimiento</div>
@@ -2754,15 +2943,16 @@
     ${daysHTML}
     <div class="cal-report">
       <div class="report-title">Reporte general del plan</div>
+      ${filterHTML}
       <div class="report-grid">
-        <div class="report-metric"><div class="report-val">${pct}%</div><div class="report-lbl">cumplimiento total</div></div>
+        <div class="report-metric"><div class="report-val">${pct}%</div><div class="report-lbl">cumplimiento del periodo</div></div>
         <div class="report-metric"><div class="report-val">${perfectDays}</div><div class="report-lbl">días perfectos (${HABITS.length}/${HABITS.length})</div></div>
         <div class="report-metric"><div class="report-val">${completedChecks}</div><div class="report-lbl">hábitos completados</div></div>
-        <div class="report-metric"><div class="report-val">${totalDaysPast}</div><div class="report-lbl">días transcurridos</div></div>
+        <div class="report-metric"><div class="report-val">${calcDays}</div><div class="report-lbl">días evaluados</div></div>
       </div>
       <div style="margin-top:1rem">
         <div class="label" style="margin-bottom:10px">Cumplimiento por hábito</div>
-        ${habitTotals.map(h => `<div class="progress-bar-wrap"><div class="progress-bar-label"><span>${h.icon} ${h.h}</span><span>${h.cnt}/${totalDaysPast} días (${h.pct}%)</span></div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${h.pct}%"></div></div></div>`).join('')}
+        ${habitTotals.map(h => `<div class="progress-bar-wrap"><div class="progress-bar-label"><span>${h.icon} ${h.h}</span><span>${h.cnt}/${calcDays} días (${h.pct}%)</span></div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${h.pct}%"></div></div></div>`).join('')}
       </div>
       <button onclick="window._clearAll()" style="margin-top:1rem;padding:6px 14px;border:1px solid var(--red-bg);border-radius:20px;background:none;color:var(--red);font-size:12px;cursor:pointer">Borrar todo el progreso</button>
     </div>`;
@@ -2774,10 +2964,14 @@
     };
     window._changeWeek = (dir) => {
       currentWeek = Math.max(0, Math.min(CAL_WEEKS - 1, currentWeek + dir));
+      const curD = weekStart(currentWeek);
+      window._currentMonthKey = curD.getFullYear() + '-' + curD.getMonth();
       renderCalendar();
     };
     window._jumpWeek = (w) => {
       currentWeek = w;
+      const curD = weekStart(currentWeek);
+      window._currentMonthKey = curD.getFullYear() + '-' + curD.getMonth();
       renderCalendar();
     };
     window._clearAll = async () => {
