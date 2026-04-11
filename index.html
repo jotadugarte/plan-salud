@@ -1873,6 +1873,11 @@
       }
 
       .future-day {
+        background: var(--surface2);
+      }
+      
+      .future-day .day-cell-header,
+      .future-day .day-cell-dots {
         opacity: 0.3;
       }
 
@@ -1976,7 +1981,9 @@
       .day-shortcuts {
         display: flex;
         gap: 6px;
-        margin-top: 4px;
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px solid var(--border2);
         width: 100%;
         justify-content: center;
       }
@@ -1985,15 +1992,35 @@
         font-size: 11px;
         cursor: pointer;
         opacity: 1;
-        background: var(--surface2);
-        padding: 3px 6px;
-        border-radius: 8px;
-        transition: all 0.15s;
+        background: var(--surface);
+        color: var(--text);
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: all 0.1s;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 600;
+        border: 1px solid var(--border2);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
       }
 
-      .day-shortcut:hover {
-        background: var(--border2);
+      .day-shortcut:active {
+        box-shadow: none;
+        transform: translateY(1px);
+      }
+
+      .shortcut-menu:hover {
+        background: var(--amber-bg);
+        border-color: var(--amber);
+        color: var(--amber);
+      }
+
+      .shortcut-ex:hover {
+        background: var(--blue-bg);
+        border-color: var(--blue);
+        color: var(--blue);
       }
 
       .report-grid {
@@ -2847,8 +2874,8 @@
           <div class="day-cell-header" title="${formatDate(day)}">${day.getDate()} ${DAY_NAMES[d].charAt(0)}</div>
           <div class="day-cell-dots">${dotsHTML}</div>
           <div class="day-shortcuts">
-            <span class="day-shortcut" title="Ir al menú de este día" onclick="window._jumpToModule('menu', ${currentWeek}, ${d})">📋</span>
-            <span class="day-shortcut" title="Ir a la rutina de esta fase" onclick="window._jumpToModule('ejercicio', ${currentWeek}, ${d})">👟</span>
+            <span class="day-shortcut shortcut-menu" title="Menu" onclick="window._jumpToModule('menu', ${currentWeek}, ${d})">🍽️</span>
+            <span class="day-shortcut shortcut-ex" title="Rutina" onclick="window._jumpToModule('ejercicio', ${currentWeek}, ${d})">👟</span>
           </div>
         </div>`;
       }
@@ -2905,6 +2932,12 @@
     function buildReportHTML(stats) {
       const { pct, perfectDays, completedChecks, calcDays, habitTotals } = stats;
       const f = window._currentReportFilter;
+      
+      let reportTitle = "Reporte general del plan";
+      if (f === 'today') reportTitle = "Reporte del día";
+      else if (f === 'week') reportTitle = "Reporte semanal";
+      else if (f === 'month') reportTitle = "Reporte mensual";
+
       const filterHTML = `<div class="report-filters">
           <button class="report-filter-btn ${f === 'today' ? 'active' : ''}" onclick="window._setReportFilter('today')">Día</button>
           <button class="report-filter-btn ${f === 'week' ? 'active' : ''}" onclick="window._setReportFilter('week')">Semana</button>
@@ -2912,7 +2945,7 @@
           <button class="report-filter-btn ${f === 'all' ? 'active' : ''}" onclick="window._setReportFilter('all')">Completo</button>
         </div>`;
       return `<div class="cal-report">
-      <div class="report-title">Reporte general del plan</div>
+      <div class="report-title">${reportTitle}</div>
       ${filterHTML}
       <div class="report-grid">
         <div class="report-metric"><div class="report-val">${pct}%</div><div class="report-lbl">cumplimiento del periodo</div></div>
