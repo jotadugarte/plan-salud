@@ -11,27 +11,27 @@
     rel="stylesheet">
   <style>
     :root {
-      --bg: #F7F5F0;
+      --bg: #FCFAf6;
       --surface: #FFFFFF;
-      --surface2: #F1EDE5;
-      --g900: #1A3A0B;
-      --g600: #3A7A1A;
-      --g400: #6AAF38;
-      --g100: #EDF6E5;
-      --g50: #F6FAF1;
-      --amber: #B87A18;
-      --amber-bg: #FEF4E2;
-      --blue: #1A5490;
-      --blue-bg: #EBF2FA;
-      --red: #A02828;
-      --red-bg: #FCEAEA;
-      --text: #1C1C19;
-      --text2: #5A5A55;
-      --text3: #9A9A92;
-      --border: rgba(0, 0, 0, 0.08);
-      --border2: rgba(0, 0, 0, 0.14);
-      --radius: 10px;
-      --radius-lg: 14px;
+      --surface2: #F6F3EC;
+      --g900: #2E1760;
+      --g600: #6B42F4;
+      --g400: #2ECC71;
+      --g100: #F0EDFE;
+      --g50: #F8F7FF;
+      --amber: #FF7B54;
+      --amber-bg: #FFF2EE;
+      --blue: #1C9FE8;
+      --blue-bg: #EAF6FE;
+      --red: #FA4A5D;
+      --red-bg: #FFF0F1;
+      --text: #191B24;
+      --text2: #5D637A;
+      --text3: #A0A5BA;
+      --border: rgba(46, 23, 96, 0.08);
+      --border2: rgba(46, 23, 96, 0.14);
+      --radius: 12px;
+      --radius-lg: 16px;
     }
 
     * {
@@ -113,32 +113,36 @@
     /* MAIN NAV */
     .main-nav {
       background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      border-bottom: none;
+      box-shadow: 0 4px 12px rgba(46, 23, 96, 0.03);
       display: flex;
       overflow-x: auto;
-      padding: 0 1rem
+      padding: 0.75rem 1rem;
+      gap: 0.5rem;
     }
 
     .main-nav-btn {
-      padding: 1rem 1.25rem;
+      padding: 0.6rem 1.1rem;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text2);
       border: none;
-      background: none;
+      background: var(--surface2);
+      border-radius: 20px;
       cursor: pointer;
       white-space: nowrap;
-      border-bottom: 2px solid transparent;
-      transition: all .15s
+      transition: all .2s ease;
     }
 
     .main-nav-btn.active {
-      color: var(--g600);
-      border-bottom-color: var(--g600)
+      color: #fff;
+      background: var(--g600);
+      box-shadow: 0 4px 10px rgba(107, 66, 244, 0.3);
     }
 
-    .main-nav-btn:hover {
-      color: var(--text)
+    .main-nav-btn:hover:not(.active) {
+      background: #EBE5DB;
+      color: var(--text);
     }
 
     /* CONTENT */
@@ -159,10 +163,11 @@
     /* CARDS */
     .card {
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(0,0,0,0.02);
+      box-shadow: 0 4px 16px rgba(46, 23, 96, 0.04);
       border-radius: var(--radius-lg);
       padding: 1.25rem;
-      margin-bottom: 1rem
+      margin-bottom: 1rem;
     }
 
     .card-green {
@@ -755,13 +760,13 @@
 
   <!-- MAIN NAV -->
   <nav class="main-nav">
-    <button class="main-nav-btn active" onclick="showMain('salud',this)">❤️ Salud</button>
+    <button class="main-nav-btn active" onclick="showMain('calendario',this)">📅 Calendario</button>
+    <button class="main-nav-btn" onclick="showMain('salud',this)">❤️ Salud</button>
     <button class="main-nav-btn" onclick="showMain('habitos',this)">🌿 Hábitos</button>
     <button class="main-nav-btn" onclick="showMain('menu',this)">🍽️ Menú</button>
     <button class="main-nav-btn" onclick="showMain('recetas',this)">📖 Recetas</button>
     <button class="main-nav-btn" onclick="showMain('compras',this)">🛒 Compras</button>
     <button class="main-nav-btn" onclick="showMain('ejercicio',this)">🏋️ Ejercicio</button>
-    <button class="main-nav-btn" onclick="showMain('calendario',this)">📅 Calendario</button>
   </nav>
 
   <div class="content">
@@ -1669,7 +1674,7 @@
     </div>
 
     <!-- ===== SALUD ===== -->
-    <div id="salud" class="section active">
+    <div id="salud" class="section">
       <div class="section-title">Salud y seguimiento médico</div>
       <div class="section-sub">Condiciones actuales y recomendaciones para tu médica</div>
 
@@ -1878,12 +1883,12 @@
       
       .future-day .day-cell-header,
       .future-day .day-cell-dots {
-        opacity: 0.3;
+        opacity: 0.55;
       }
 
       .today-cell {
-        border-color: var(--g500);
-        box-shadow: 0 0 0 1px var(--g500);
+        border-color: var(--g600);
+        box-shadow: 0 0 0 2px var(--g600);
       }
 
       .day-cell-header {
@@ -1913,29 +1918,35 @@
         align-items: center;
         justify-content: center;
         font-size: 13px;
-        filter: grayscale(1) opacity(0.7);
+        filter: saturate(0.5) opacity(0.5);
       }
 
       .habit-dot.active {
         border-color: transparent !important;
-        filter: grayscale(0) opacity(1);
+        filter: saturate(1) opacity(1);
       }
 
       .habit-dot:hover {
-        transform: scale(1.2);
-        filter: grayscale(0) opacity(1);
+        transform: scale(1.15);
+        filter: saturate(1) opacity(1);
       }
 
       .week-jump-select {
-        padding: 6px 12px;
-        border-radius: 6px;
-        border: 1px solid var(--border);
+        padding: 10px 16px;
+        border-radius: 12px;
+        border: 1px solid rgba(46, 23, 96, 0.08); /* Borde sutil */
         background: var(--surface);
         color: var(--text);
-        font-size: 14px;
-        font-weight: 500;
+        font-size: 15px;
+        font-weight: 700;
         cursor: pointer;
         outline: none;
+        box-shadow: 0 4px 12px rgba(46, 23, 96, 0.04);
+        transition: all 0.2s;
+      }
+      .week-jump-select:focus {
+        border-color: var(--g600);
+        box-shadow: 0 4px 12px rgba(107, 66, 244, 0.15);
       }
 
       .cal-report {
@@ -1963,7 +1974,7 @@
       .report-filter-btn {
         padding: 5px 12px;
         border-radius: 16px;
-        border: 1px solid var(--border2);
+        border: 1px solid rgba(0,0,0,0.03);
         background: var(--surface2);
         color: var(--text3);
         font-size: 11px;
@@ -1973,9 +1984,10 @@
       }
 
       .report-filter-btn.active {
-        background: var(--g800);
-        color: var(--surface);
-        border-color: var(--g800);
+        background: var(--g900);
+        color: #fff;
+        border-color: var(--g900);
+        box-shadow: 0 4px 10px rgba(46, 23, 96, 0.25);
       }
 
       .day-shortcuts {
@@ -2126,6 +2138,9 @@
         .header { flex-direction: column; text-align: center; padding: 1.5rem 1rem; gap: 0.5rem; }
         .header-stats { margin: 1rem auto 0; justify-content: center; width: 100%; flex-wrap: wrap; }
         
+        .main-nav { flex-wrap: wrap; justify-content: center; padding: 0.75rem 0.5rem; gap: 6px; border-bottom: 1px solid rgba(0,0,0,0.03); }
+        .main-nav-btn { flex: 0 0 auto; padding: 0.5rem 0.8rem; font-size: 11px; }
+        
         .metrics-row { grid-template-columns: 1fr; gap: 8px; margin-bottom: 1.5rem; }
         .metric { padding: 0.85rem; }
         
@@ -2145,15 +2160,15 @@
         /* Calendario: Render del Mes (Celdas Diarias) */
         .day-cell { padding: 8px 6px; min-height: 120px; gap: 8px; }
         .day-cell-header { font-size: 13px; margin-bottom: 6px; font-weight: 800; }
-        .day-cell-dots { gap: 6px; max-width: 100%; display: flex; flex-wrap: wrap; justify-content: center; }
-        .habit-dot { width: 32px; height: 32px; font-size: 16px; border-width: 1px; }
+        .day-cell-dots { gap: 4px; width: 100%; display: grid; grid-template-columns: repeat(2, auto); justify-content: center; justify-items: center; }
+        .habit-dot { width: 36px; height: 36px; font-size: 18px; border-width: 1px; }
         
         .day-shortcuts { flex-direction: column; gap: 8px; border-top: none; margin-top: 6px; padding-top: 0; }
         .day-shortcut { width: 100%; justify-content: center; padding: 8px; font-size: 14px; border-radius: 8px; gap: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
       }
     </style>
 
-    <div id="calendario" class="section"></div>
+    <div id="calendario" class="section active"></div>
 
   </div><!-- end .content -->
 
@@ -2876,12 +2891,13 @@
     }
 
     function buildJumpHTML(monthMap, monthKeys) {
-      let html = '<div style="margin-bottom:1rem;"><select class="week-jump-select" aria-label="Seleccionar mes" style="width:100%;margin-bottom:12px" onchange="window._jumpMonth(this.value)">';
+      let html = '<div style="margin-bottom:1rem; text-align:center;"><select class="week-jump-select" aria-label="Seleccionar mes" style="margin-bottom:12px; display:inline-block; width:auto;" onchange="window._jumpMonth(this.value)">';
       monthKeys.forEach((k) => {
         const isCurMonth = k === window._currentMonthKey;
         html += `<option value="${k}" ${isCurMonth ? 'selected' : ''}>${monthMap[k].name}</option>`;
       });
-      html += '</select><div class="sub-tabs" style="margin-bottom:0">';
+      html += '</select>';
+      html += '<div class="sub-tabs" style="justify-content:center; margin-bottom:0;">';
       monthMap[window._currentMonthKey].weeks.forEach((wk) => {
         const isWkCur = wk.w === currentWeek;
         html += `<button class="sub-tab${isWkCur ? ' active' : ''}" onclick="window._jumpWeek(${wk.w})">Semana ${wk.w + 1}${wk.hasData && !isWkCur ? ' •' : ''}</button>`;
@@ -2906,7 +2922,7 @@
           dotsHTML += `<div class="habit-dot ${checked ? 'active' : ''}" style="background:${bg};border-color:${border}" title="${h}" onclick="window._toggleHabit('${dayStr}','${h}',${!checked})">${HABIT_ICONS[i]}</div>`;
         });
         html += `<div class="day-cell ${isFuture ? 'future-day' : ''} ${isToday ? 'today-cell' : ''}">
-          <div class="day-cell-header" title="${formatDate(day)}">${day.getDate()} ${DAY_NAMES[d].charAt(0)}</div>
+          <div class="day-cell-header" title="${formatDate(day)}">${day.getDate()} ${DAY_NAMES[d].slice(0, 3)}</div>
           <div class="day-cell-dots">${dotsHTML}</div>
           <div class="day-shortcuts">
             <span class="day-shortcut shortcut-menu" title="Menu" onclick="window._jumpToModule('menu', ${currentWeek}, ${d})">🍽️</span>
@@ -2933,12 +2949,16 @@
 
       let startOffset = 0;
       let endOffset = totalDaysTarget;
-      if (window._currentReportFilter === 'today') {
-        startOffset = diffDays; endOffset = diffDays + 1;
-      } else if (window._currentReportFilter === 'week') {
+      if (window._currentReportFilter === 'week') {
         startOffset = currentWeek * 7; endOffset = startOffset + 7;
       } else if (window._currentReportFilter === 'month') {
-        startOffset = Math.max(0, diffDays - 29); endOffset = diffDays + 1;
+        if (window._currentMonthKey) {
+          const p = window._currentMonthKey.split('-');
+          const ms = new Date(parseInt(p[0]), parseInt(p[1]), 1);
+          const me = new Date(parseInt(p[0]), parseInt(p[1]) + 1, 1);
+          startOffset = Math.floor((ms - CAL_START) / 86400000);
+          endOffset = Math.floor((me - CAL_START) / 86400000);
+        }
       }
       endOffset = Math.min(CAL_WEEKS * 7, Math.max(1, endOffset));
       startOffset = Math.max(0, startOffset);
@@ -2952,14 +2972,14 @@
         if (s === HABITS.length) perfectDays++;
       }
       const totalChecks = calcDays * HABITS.length;
-      const pct = totalChecks > 0 ? Math.round(completedChecks / totalChecks * 100) : 0;
+      const pct = totalChecks > 0 ? (completedChecks / totalChecks * 100).toFixed(2) : "0.00";
       const habitTotals = HABITS.map((h, i) => {
         let cnt = 0;
         for (let d = startOffset; d < endOffset; d++) {
           const day = new Date(CAL_START); day.setDate(day.getDate() + d);
           if (getCheck(ds(day), h)) cnt++;
         }
-        return { h, icon: HABIT_ICONS[i], cnt, pct: calcDays > 0 ? Math.round(cnt / calcDays * 100) : 0 };
+        return { h, icon: HABIT_ICONS[i], cnt, pct: calcDays > 0 ? (cnt / calcDays * 100).toFixed(2) : "0.00" };
       });
       return { pct, perfectDays, completedChecks, calcDays, habitTotals };
     }
@@ -2967,20 +2987,13 @@
     function buildReportHTML(stats) {
       const { pct, perfectDays, completedChecks, calcDays, habitTotals } = stats;
       const f = window._currentReportFilter;
-      
-      let reportTitle = "Reporte general del plan";
-      if (f === 'today') reportTitle = "Reporte del día";
-      else if (f === 'week') reportTitle = "Reporte semanal";
-      else if (f === 'month') reportTitle = "Reporte mensual";
 
-      const filterHTML = `<div class="report-filters">
-          <button class="report-filter-btn ${f === 'today' ? 'active' : ''}" onclick="window._setReportFilter('today')">Día</button>
+      const filterHTML = `<div class="report-filters" style="justify-content: center; margin-bottom: 12px;">
           <button class="report-filter-btn ${f === 'week' ? 'active' : ''}" onclick="window._setReportFilter('week')">Semana</button>
           <button class="report-filter-btn ${f === 'month' ? 'active' : ''}" onclick="window._setReportFilter('month')">Mes</button>
           <button class="report-filter-btn ${f === 'all' ? 'active' : ''}" onclick="window._setReportFilter('all')">Completo</button>
         </div>`;
       return `<div class="cal-report">
-      <div class="report-title">${reportTitle}</div>
       ${filterHTML}
       <div class="report-grid">
         <div class="report-metric"><div class="report-val">${pct}%</div><div class="report-lbl">cumplimiento del periodo</div></div>
@@ -3021,15 +3034,8 @@
       const reportHTML = buildReportHTML(stats);
 
       section.innerHTML = `
-    <div class="section-title">Calendario de seguimiento</div>
-    <div class="section-sub">26 semanas · inicio 13 de abril 2026 · sincronizado con Firebase</div>
     ${jumpHTML}
-    <div class="cal-header">
-      <div class="cal-nav">
-        <button class="cal-nav-btn" onclick="window._changeWeek(-1)" ${currentWeek === 0 ? 'disabled' : ''}>← Anterior</button>
-        <div class="cal-week-label">Semana ${currentWeek + 1} — ${formatDate(ws)}</div>
-        <button class="cal-nav-btn" onclick="window._changeWeek(1)" ${currentWeek === CAL_WEEKS - 1 ? 'disabled' : ''}>Siguiente →</button>
-      </div>
+    <div style="display: flex; justify-content: center; margin-bottom: 12px;">
       <span class="badge ${phase.cls}">${phase.label}</span>
     </div>
     ${daysHTML}
@@ -3062,6 +3068,13 @@
       if (!calLoaded) loadAllData();
       else renderCalendar();
     };
+
+    // Auto-load default active section content if needed
+    window.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('calendario').classList.contains('active')) {
+        window.loadCalendarIfNeeded();
+      }
+    });
   </script>
 
 </body>
