@@ -1622,7 +1622,8 @@
           <div class="dot-row">
             <div class="dot db"></div>
             <div>Activar el conteo de pasos desde hoy. Meta fase 1: <strong>7,000 pasos/día</strong>. Fase 2:
-              <strong>10,000</strong>.</div>
+              <strong>10,000</strong>.
+            </div>
           </div>
           <div class="dot-row">
             <div class="dot db"></div>
@@ -2698,19 +2699,17 @@
       for (let d = 0; d < 7; d++) {
         const day = new Date(ws); day.setDate(day.getDate() + d);
         const dayStr = ds(day);
-        const isFuture = day > today;
         const isToday = day.getTime() === today.getTime();
         const score = getDayScore(dayStr);
         let scoreLabel, scoreCls;
-        if (isFuture) { scoreLabel = 'Próximo'; scoreCls = 'future'; }
-        else if (score === 5) { scoreLabel = '5/5 ✓'; scoreCls = 'full'; }
+        if (score === 5) { scoreLabel = '5/5 ✓'; scoreCls = 'full'; }
         else if (score > 0) { scoreLabel = score + '/5'; scoreCls = 'partial'; }
         else { scoreLabel = '0/5'; scoreCls = 'empty'; }
 
         daysHTML += `<div class="day-card"><div class="day-card-header"><div><span class="day-name">${DAY_NAMES[d]}${isToday ? '<span class="today-badge">HOY</span>' : ''}</span><span class="day-date" style="margin-left:8px">${formatDate(day)}</span></div><span class="day-score ${scoreCls}">${scoreLabel}</span></div><div class="checks-grid">`;
         HABITS.forEach((h, i) => {
           const checked = getCheck(dayStr, h);
-          daysHTML += `<label class="check-item${isFuture ? ' future' : ''}"><input type="checkbox" ${checked ? 'checked' : ''} ${isFuture ? 'disabled' : ''} onchange="window._toggleHabit('${dayStr}','${h}',this.checked)"><span class="check-label">${HABIT_ICONS[i]}<br>${h}</span></label>`;
+          daysHTML += `<label class="check-item"><input type="checkbox" ${checked ? 'checked' : ''} onchange="window._toggleHabit('${dayStr}','${h}',this.checked)"><span class="check-label">${HABIT_ICONS[i]}<br>${h}</span></label>`;
         });
         daysHTML += `</div></div>`;
       }
