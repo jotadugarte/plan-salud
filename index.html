@@ -2607,7 +2607,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    const CAL_START = new Date('2026-04-13');
+    const CAL_START = new Date(2026, 3, 13);
     const CAL_WEEKS = 26;
     const HABITS = ['Desayuno', 'Almuerzo', 'Cena', 'Agua', 'Ejercicio'];
     const HABIT_ICONS = ['☀️', '🍽️', '🌙', '💧', '🏋️'];
@@ -2714,7 +2714,18 @@
         daysHTML += `</div></div>`;
       }
 
-      const totalDaysPast = Math.max(0, Math.min(CAL_WEEKS * 7, diffDays + 1));
+      let totalDaysPast = Math.max(0, diffDays + 1);
+      if (calData && Object.keys(calData).length > 0) {
+        Object.keys(calData).forEach(dateStr => {
+          const parts = dateStr.split('-');
+          if (parts.length === 3) {
+            const d = new Date(parts[0], parts[1] - 1, parts[2]);
+            const offset = Math.floor((d - CAL_START) / 86400000);
+            if (offset + 1 > totalDaysPast) totalDaysPast = offset + 1;
+          }
+        });
+      }
+      totalDaysPast = Math.min(CAL_WEEKS * 7, Math.max(1, totalDaysPast));
       let completedChecks = 0, perfectDays = 0;
       for (let d = 0; d < totalDaysPast; d++) {
         const day = new Date(CAL_START); day.setDate(day.getDate() + d);
