@@ -1836,94 +1836,84 @@
         text-align: center
       }
 
-      .day-card {
+      .week-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+        margin-bottom: 1rem;
+      }
+
+      .day-cell {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        margin-bottom: .75rem;
-        overflow: hidden
-      }
-
-      .day-card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: .75rem 1.25rem;
-        background: var(--surface2);
-        border-bottom: 1px solid var(--border)
-      }
-
-      .day-name {
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--text)
-      }
-
-      .day-date {
-        font-size: 12px;
-        color: var(--text3)
-      }
-
-      .day-score {
-        font-size: 12px;
-        font-weight: 600;
-        padding: 3px 10px;
-        border-radius: 20px
-      }
-
-      .day-score.full {
-        background: #EAF3DE;
-        color: #3B6D11
-      }
-
-      .day-score.partial {
-        background: #FAEEDA;
-        color: #854F0B
-      }
-
-      .day-score.empty {
-        background: var(--surface2);
-        color: var(--text3)
-      }
-
-      .day-score.future {
-        background: var(--surface2);
-        color: var(--text3)
-      }
-
-      .checks-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 6px;
-        padding: 1rem 1.25rem
-      }
-
-      .check-item {
+        border-radius: 8px;
+        padding: 8px 4px;
         display: flex;
         flex-direction: column;
+        gap: 8px;
         align-items: center;
-        gap: 5px;
-        cursor: pointer
+        justify-content: space-between;
       }
 
-      .check-item input[type=checkbox] {
-        width: 20px;
-        height: 20px;
-        accent-color: var(--g600);
-        cursor: pointer
+      .future-day {
+        opacity: 0.3;
       }
 
-      .check-label {
+      .today-cell {
+        border-color: var(--g500);
+        box-shadow: 0 0 0 1px var(--g500);
+      }
+
+      .day-cell-header {
         font-size: 11px;
+        font-weight: 700;
         color: var(--text2);
         text-align: center;
-        font-weight: 500;
-        line-height: 1.3
       }
 
-      .check-item.future {
-        opacity: .35;
-        pointer-events: none
+      .day-cell-dots {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        width: 100%;
+        max-width: 80px;
+        justify-items: center;
+      }
+
+      .habit-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid var(--border2);
+        cursor: pointer;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        filter: grayscale(1) opacity(0.7);
+      }
+
+      .habit-dot.active {
+        border-color: transparent !important;
+        filter: grayscale(0) opacity(1);
+      }
+
+      .habit-dot:hover {
+        transform: scale(1.2);
+        filter: grayscale(0) opacity(1);
+      }
+
+      .week-jump-select {
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        outline: none;
       }
 
       .cal-report {
@@ -2609,8 +2599,8 @@
 
     const CAL_START = new Date(2026, 3, 13);
     const CAL_WEEKS = 26;
-    const HABITS = ['Desayuno', 'Almuerzo', 'Cena', 'Agua', 'Ejercicio'];
-    const HABIT_ICONS = ['☀️', '🍽️', '🌙', '💧', '🏋️'];
+    const HABITS = ['Desayuno', 'Almuerzo', 'Cena', 'Agua', 'Ejercicio', 'Paseo de Pixel'];
+    const HABIT_ICONS = ['☀️', '🍽️', '🌙', '💧', '🏋️', '🐶'];
     const DAY_NAMES = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     let currentWeek = 0;
 
@@ -2682,7 +2672,7 @@
       const ws = weekStart(currentWeek);
       const phase = getPhase(currentWeek);
 
-      let jumpHTML = '<div class="week-jump">';
+      let jumpHTML = '<select class="week-jump-select" onchange="window._jumpWeek(parseInt(this.value))">';
       for (let w = 0; w < CAL_WEEKS; w++) {
         const wDate = weekStart(w);
         let hasData = false;
@@ -2691,28 +2681,32 @@
           if (getDayScore(ds(dd)) > 0) hasData = true;
         }
         const isCur = w === currentWeek;
-        jumpHTML += `<button class="week-jump-btn${isCur ? ' cur' : ''}${hasData && !isCur ? ' has-data' : ''}" onclick="window._jumpWeek(${w})">${w + 1}</button>`;
+        jumpHTML += `<option value="${w}" ${isCur ? 'selected' : ''}>Semana ${w + 1}${hasData && !isCur ? ' (con datos)' : ''}</option>`;
       }
-      jumpHTML += '</div>';
+      jumpHTML += '</select>';
 
-      let daysHTML = '';
+      let daysHTML = '<div class="week-grid">';
       for (let d = 0; d < 7; d++) {
         const day = new Date(ws); day.setDate(day.getDate() + d);
         const dayStr = ds(day);
+        const isFuture = day > today;
         const isToday = day.getTime() === today.getTime();
-        const score = getDayScore(dayStr);
-        let scoreLabel, scoreCls;
-        if (score === 5) { scoreLabel = '5/5 ✓'; scoreCls = 'full'; }
-        else if (score > 0) { scoreLabel = score + '/5'; scoreCls = 'partial'; }
-        else { scoreLabel = '0/5'; scoreCls = 'empty'; }
 
-        daysHTML += `<div class="day-card"><div class="day-card-header"><div><span class="day-name">${DAY_NAMES[d]}${isToday ? '<span class="today-badge">HOY</span>' : ''}</span><span class="day-date" style="margin-left:8px">${formatDate(day)}</span></div><span class="day-score ${scoreCls}">${scoreLabel}</span></div><div class="checks-grid">`;
+        let dotsHTML = '';
+        const HABIT_COLORS = ['#FF4757', '#FFA502', '#5352ED', '#00D2D3', '#2ED573', '#9C88FF'];
         HABITS.forEach((h, i) => {
           const checked = getCheck(dayStr, h);
-          daysHTML += `<label class="check-item"><input type="checkbox" ${checked ? 'checked' : ''} onchange="window._toggleHabit('${dayStr}','${h}',this.checked)"><span class="check-label">${HABIT_ICONS[i]}<br>${h}</span></label>`;
+          const bg = checked ? HABIT_COLORS[i] : 'transparent';
+          const border = checked ? HABIT_COLORS[i] : 'var(--border2)';
+          dotsHTML += `<div class="habit-dot ${checked ? 'active' : ''}" style="background:${bg};border-color:${border}" title="${h}" onclick="window._toggleHabit('${dayStr}','${h}',${!checked})">${HABIT_ICONS[i]}</div>`;
         });
-        daysHTML += `</div></div>`;
+
+        daysHTML += `<div class="day-cell ${isFuture ? 'future-day' : ''} ${isToday ? 'today-cell' : ''}">
+          <div class="day-cell-header" title="${formatDate(day)}">${day.getDate()} ${DAY_NAMES[d].charAt(0)}</div>
+          <div class="day-cell-dots">${dotsHTML}</div>
+        </div>`;
       }
+      daysHTML += '</div>';
 
       let totalDaysPast = Math.max(0, diffDays + 1);
       if (calData && Object.keys(calData).length > 0) {
@@ -2731,9 +2725,9 @@
         const day = new Date(CAL_START); day.setDate(day.getDate() + d);
         const s = getDayScore(ds(day));
         completedChecks += s;
-        if (s === 5) perfectDays++;
+        if (s === HABITS.length) perfectDays++;
       }
-      const totalChecks = totalDaysPast * 5;
+      const totalChecks = totalDaysPast * HABITS.length;
       const pct = totalChecks > 0 ? Math.round(completedChecks / totalChecks * 100) : 0;
       const habitTotals = HABITS.map((h, i) => {
         let cnt = 0;
@@ -2762,7 +2756,7 @@
       <div class="report-title">Reporte general del plan</div>
       <div class="report-grid">
         <div class="report-metric"><div class="report-val">${pct}%</div><div class="report-lbl">cumplimiento total</div></div>
-        <div class="report-metric"><div class="report-val">${perfectDays}</div><div class="report-lbl">días perfectos (5/5)</div></div>
+        <div class="report-metric"><div class="report-val">${perfectDays}</div><div class="report-lbl">días perfectos (${HABITS.length}/${HABITS.length})</div></div>
         <div class="report-metric"><div class="report-val">${completedChecks}</div><div class="report-lbl">hábitos completados</div></div>
         <div class="report-metric"><div class="report-val">${totalDaysPast}</div><div class="report-lbl">días transcurridos</div></div>
       </div>
