@@ -11,9 +11,9 @@
     rel="stylesheet">
   <style>
     :root {
-      --bg: #FCFAf6;
+      --bg: #F6F7FB;
       --surface: #FFFFFF;
-      --surface2: #F6F3EC;
+      --surface2: #EEF0F7;
       --g900: #2E1760;
       --g600: #6B42F4;
       --g400: #2ECC71;
@@ -28,10 +28,17 @@
       --text: #191B24;
       --text2: #5D637A;
       --text3: #A0A5BA;
-      --border: rgba(46, 23, 96, 0.08);
-      --border2: rgba(46, 23, 96, 0.14);
+      --border: rgba(46, 23, 96, 0.07);
+      --border2: rgba(46, 23, 96, 0.11);
       --radius: 12px;
       --radius-lg: 16px;
+      /* Habit category colors */
+      --cat-food: #FF7A59;
+      --cat-food-bg: rgba(255, 122, 89, 0.12);
+      --cat-health: #34D399;
+      --cat-health-bg: rgba(52, 211, 153, 0.12);
+      --cat-emotional: #8B7CFF;
+      --cat-emotional-bg: rgba(139, 124, 255, 0.12);
     }
 
     * {
@@ -42,7 +49,8 @@
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
+      background: linear-gradient(180deg, #F8F9FC 0%, #F2F4F8 100%);
+      background-attachment: fixed;
       color: var(--text);
       font-size: 15px;
       line-height: 1.6
@@ -141,15 +149,18 @@
     }
 
     .main-nav-btn:hover:not(.active) {
-      background: #EBE5DB;
+      background: #E4E7F2;
       color: var(--text);
     }
 
-    /* CONTENT */
+    /* CONTENT — Level 2: white panel over gradient bg */
     .content {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem
+      max-width: 880px;
+      margin: 1.5rem auto;
+      padding: 2rem 1.5rem;
+      background: #FFFFFF;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.03);
     }
 
     .section {
@@ -1609,7 +1620,7 @@
         </div>
         <div class="habit-block">
           <div class="habit-time">11:00 pm</div>
-          <div class="habit-action">Hora de dormir consistente. El cuerpo aprende el ritmo.</div>
+          <div class="habit-action"><strong>Sueño.</strong> Hora de dormir consistente. El cuerpo aprende el ritmo para asegurar un descanso reparador.</div>
         </div>
       </div>
 
@@ -1864,17 +1875,24 @@
         margin-bottom: 1rem;
       }
 
+      /* Level 3: day cards */
       .day-cell {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
+        background: #FFFFFF;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 14px;
         padding: 8px 4px;
         min-height: 110px;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
         align-items: center;
         justify-content: space-between;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+      .day-cell:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.09);
       }
 
       .future-day {
@@ -1900,34 +1918,40 @@
 
       .day-cell-dots {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, auto);
+        justify-content: center;
         gap: 4px;
         width: 100%;
-        max-width: 80px;
-        justify-items: center;
+      }
+      .day-cell-dots .habit-dot:nth-last-child(1):nth-child(odd) {
+        grid-column: span 2;
+        justify-self: center;
       }
 
       .habit-dot {
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        border: 1px solid var(--border2);
+        border: 1.5px solid currentColor;
         cursor: pointer;
-        transition: all 0.15s;
+        transition: all 0.18s cubic-bezier(0.34,1.56,0.64,1);
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 13px;
-        filter: saturate(0.5) opacity(0.5);
+        /* inactive state: tinted bg, icon visible but soft */
+        filter: saturate(0.7) opacity(0.65);
       }
 
       .habit-dot.active {
         border-color: transparent !important;
         filter: saturate(1) opacity(1);
+        box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+        transform: scale(1.05);
       }
 
       .habit-dot:hover {
-        transform: scale(1.15);
+        transform: scale(1.2);
         filter: saturate(1) opacity(1);
       }
 
@@ -2158,9 +2182,8 @@
         .wday { font-size: 13px; padding: 8px 2px; }
 
         /* Calendario: Render del Mes (Celdas Diarias) */
-        .day-cell { padding: 8px 6px; min-height: 120px; gap: 8px; }
-        .day-cell-header { font-size: 13px; margin-bottom: 6px; font-weight: 800; }
-        .day-cell-dots { gap: 4px; width: 100%; display: grid; grid-template-columns: repeat(2, auto); justify-content: center; justify-items: center; }
+        .day-cell { padding: 8px 4px; gap: 4px; min-height: 120px; }
+        .day-cell-header { font-size: 13px; margin-bottom: 2px; font-weight: 800; }
         .habit-dot { width: 36px; height: 36px; font-size: 18px; border-width: 1px; }
         
         .day-shortcuts { flex-direction: column; gap: 8px; border-top: none; margin-top: 6px; padding-top: 0; }
@@ -2747,8 +2770,8 @@
     // Plan start date: April 13 2026. Update here if the plan restarts.
     const CAL_START = new Date(2026, 3, 13);
     const CAL_WEEKS = 26;
-    const HABITS = ['Desayuno', 'Almuerzo', 'Cena', 'Agua', 'Ejercicio', 'Paseo de Pixel'];
-    const HABIT_ICONS = ['☀️', '🍽️', '🌙', '💧', '🏋️', '🐶'];
+    const HABITS = ['Desayuno', 'Almuerzo', 'Cena', 'Agua', 'Ejercicio', 'Paseo de Pixel', 'Sueño'];
+    const HABIT_ICONS = ['🍳', '🍽️', '🥗', '💧', '🏋️', '🐶', '🌙'];
     const DAY_NAMES = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     let currentWeek = 0;
 
@@ -2907,23 +2930,42 @@
     }
 
     function buildDaysHTML(ws, today) {
-      const HABIT_COLORS = ['#FF4757', '#FFA502', '#5352ED', '#00D2D3', '#2ED573', '#9C88FF'];
       let html = '<div class="week-grid">';
       for (let d = 0; d < 7; d++) {
         const day = new Date(ws); day.setDate(day.getDate() + d);
         const dayStr = ds(day);
         const isFuture = day > today;
         const isToday = day.getTime() === today.getTime();
+        const catGroups = [
+          { label: '🍽️ Alimentación', color: '#FF7A59', bgColor: 'rgba(255,122,89,0.12)', keys: [0, 1, 2] },
+          { label: '⚙️ Salud física',  color: '#34D399', bgColor: 'rgba(52,211,153,0.12)',  keys: [4, 3, 6] },
+          { label: '🌿 Emocional',      color: '#8B7CFF', bgColor: 'rgba(139,124,255,0.12)', keys: [5] }
+        ];
         let dotsHTML = '';
-        HABITS.forEach((h, i) => {
-          const checked = getCheck(dayStr, h);
-          const bg = checked ? HABIT_COLORS[i] : 'transparent';
-          const border = checked ? HABIT_COLORS[i] : 'var(--border2)';
-          dotsHTML += `<div class="habit-dot ${checked ? 'active' : ''}" style="background:${bg};border-color:${border}" title="${h}" onclick="window._toggleHabit('${dayStr}','${h}',${!checked})">${HABIT_ICONS[i]}</div>`;
+        catGroups.forEach((cat, idx) => {
+            const bt = idx === 0 ? 'none' : `1px solid rgba(0,0,0,0.06)`;
+            const mt = idx === 0 ? '2px' : '8px';
+            // Título: acento de color (dot) + texto en gris neutro
+            const [icon, ...textParts] = cat.label.split(' ');
+            const labelText = textParts.join(' ');
+            dotsHTML += `<div style="display:flex;align-items:center;justify-content:center;gap:3px;width:100%;margin-top:${mt};padding-top:5px;border-top:${bt};padding-bottom:3px;border-bottom:1px solid ${cat.color}22;">
+              <span style="width:5px;height:5px;border-radius:50%;background:${cat.color};flex-shrink:0;display:inline-block;"></span>
+              <span style="font-size:8.5px;font-weight:600;color:#5A5A5A;letter-spacing:0.03em;line-height:1;">${labelText}</span>
+            </div>`;
+            dotsHTML += `<div class="day-cell-dots" style="margin-top:4px;">`;
+            cat.keys.forEach(keyIdx => {
+               const h = HABITS[keyIdx];
+               const checked = getCheck(dayStr, h);
+               const bg    = checked ? cat.color    : cat.bgColor;
+               const border = checked ? cat.color   : `${cat.color}55`;
+               const iconFilter = checked ? 'filter:brightness(10)' : '';
+               dotsHTML += `<div class="habit-dot ${checked ? 'active' : ''}" style="background:${bg};border-color:${border};color:${cat.color}" title="${h}" onclick="window._toggleHabit('${dayStr}','${h}',${!checked})"><span style="${iconFilter}">${HABIT_ICONS[keyIdx]}</span></div>`;
+            });
+            dotsHTML += `</div>`;
         });
         html += `<div class="day-cell ${isFuture ? 'future-day' : ''} ${isToday ? 'today-cell' : ''}">
           <div class="day-cell-header" title="${formatDate(day)}">${day.getDate()} ${DAY_NAMES[d].slice(0, 3)}</div>
-          <div class="day-cell-dots">${dotsHTML}</div>
+          <div style="width:100%">${dotsHTML}</div>
           <div class="day-shortcuts">
             <span class="day-shortcut shortcut-menu" title="Menu" onclick="window._jumpToModule('menu', ${currentWeek}, ${d})">🍽️</span>
             <span class="day-shortcut shortcut-ex" title="Rutina" onclick="window._jumpToModule('ejercicio', ${currentWeek}, ${d})">👟</span>
