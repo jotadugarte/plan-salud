@@ -7,7 +7,7 @@ Things done and things left to do. Update this when finishing branches; use `roa
 ---
 
 ## Done
-*(No completed items yet)*
+- [x] Estandarización de interfaz (Neumorfismo Responsivo) — 2026-04-11
 
 ## In Progress
 *(No items currently in progress)*
