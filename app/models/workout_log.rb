@@ -10,7 +10,20 @@ class WorkoutLog < ApplicationRecord
   validates :completed_reps, presence: true
   validates :completed_weight, presence: true
 
+
+  def weight_object
+    @weight_object ||= Weight.new(completed_weight) if completed_weight.present? && Weight.valid?(completed_weight)
+  end
+
+  validate :weight_must_be_valid
+
   private
+
+  def weight_must_be_valid
+    if completed_weight.present? && !Weight.valid?(completed_weight)
+      errors.add(:completed_weight, :invalid)
+    end
+  end
 
   def snapshot_metrics_from_exercise
     return unless exercise

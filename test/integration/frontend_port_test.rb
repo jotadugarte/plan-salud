@@ -1,6 +1,7 @@
 require "test_helper"
 
 class FrontendPortTest < ActionDispatch::IntegrationTest
+  # [REQ-INT-001]
   test "dashboard renders the full neumorphic frontend structure" do
     get root_url
 

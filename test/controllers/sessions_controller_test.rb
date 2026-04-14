@@ -10,11 +10,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     )
   end
 
+  # [REQ-CTRL-001]
   test "should get new (login page)" do
     get new_session_url
     assert_response :success
   end
 
+  # [REQ-CTRL-002]
   test "should create session with valid credentials" do
     post session_url, params: { email: @user.email, password: "password123" }
 
@@ -23,6 +25,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @user.id, session[:user_id]
   end
 
+  # [REQ-CTRL-003]
   test "should deny session with invalid password" do
     post session_url, params: { email: @user.email, password: "wrong" }
 
@@ -30,6 +33,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_nil session[:user_id]
   end
 
+  # [REQ-CTRL-004]
   test "should destroy session (logout)" do
     # login first
     post session_url, params: { email: @user.email, password: "password123" }

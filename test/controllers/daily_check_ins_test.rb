@@ -6,6 +6,7 @@ class DailyCheckInsTest < ActionDispatch::IntegrationTest
     @exercise = Exercise.create!(name: "Squats", default_series: 4, default_reps: 12, default_weight: 45)
   end
 
+  # [REQ-CTRL-001]
   test "user can explicitly log a workout with their own metrics" do
     # Authenticate
     post session_url, params: { email: @user.email, password: "pwd" }

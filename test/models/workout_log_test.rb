@@ -11,6 +11,7 @@ class WorkoutLogTest < ActiveSupport::TestCase
     )
   end
 
+  # [REQ-COR-001]
   test "snapshots exercise metrics natively upon creation" do
     # Creating a log with no override should pull data from the Master Exercise
     log = WorkoutLog.create!(
@@ -23,6 +24,7 @@ class WorkoutLogTest < ActiveSupport::TestCase
     assert_equal 135.0, log.completed_weight
   end
 
+  # [REQ-COR-002]
   test "allows overriding the snapshot metrics without affecting catalogue" do
     log = WorkoutLog.create!(
       user: @user,

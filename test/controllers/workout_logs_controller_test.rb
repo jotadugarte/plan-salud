@@ -11,11 +11,13 @@ class WorkoutLogsControllerTest < ActionDispatch::IntegrationTest
     @other_log = WorkoutLog.create!(user: @other_user, exercise: @exercise)
   end
 
+  # [REQ-CTRL-001]
   test "cannot access logs without authenticating" do
     get workout_logs_url
     assert_redirected_to new_session_url
   end
 
+  # [REQ-CTRL-002]
   test "cannot show another user's workout log (Privacy Barrier)" do
     # Log in as @user
     post session_url, params: { email: @user.email, password: "pwd" }
@@ -25,6 +27,7 @@ class WorkoutLogsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  # [REQ-CTRL-003]
   test "can show own workout log" do
     post session_url, params: { email: @user.email, password: "pwd" }
 

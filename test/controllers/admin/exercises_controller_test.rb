@@ -8,6 +8,7 @@ class Admin::ExercisesControllerTest < ActionDispatch::IntegrationTest
     @user = User.create!(email: "user@test.com", password: "pwd", timezone: "UTC", role: "user")
   end
 
+  # [REQ-ADMIN-001]
   test "admin can access the catalog index" do
     post session_url, params: { email: @admin.email, password: "pwd" }
 
@@ -15,6 +16,7 @@ class Admin::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # [REQ-ADMIN-002]
   test "regular user cannot access the catalog index" do
     post session_url, params: { email: @user.email, password: "pwd" }
 

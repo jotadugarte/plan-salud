@@ -1,6 +1,7 @@
 require "test_helper"
 
 class ExerciseTest < ActiveSupport::TestCase
+  # [REQ-COR-001]
   test "exercise requires necessary catalogue data" do
     exercise = Exercise.new
     assert_not exercise.valid?
