@@ -57,7 +57,7 @@ Convert a static HTML/JS/CSS "Plan Integral de Salud" personal app into a multi-
   <description>Write failing tests for Core Controllers (Tracking & Admin)</description>
   <action>Test that users can only access their own logs (Privacy). Test that admins can access Master catalogs.</action>
 </step>
-<step id="7" status="pending">
+<step id="7" status="complete">
   <description>Implement Controllers & Stimulus</description>
   <action>Build endpoints for Daily Check-ins. Add Stimulus controllers for UI toggles (expanding recipes/phases).</action>
 </step>

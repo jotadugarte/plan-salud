@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
-  resources :workout_logs, only: [:index, :show]
+  resources :workout_logs, only: [:index, :show, :create]
 
   namespace :admin do
     resources :exercises, only: [:index]
