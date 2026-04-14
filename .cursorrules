@@ -127,6 +127,7 @@ The `docs/` folder is authoritative. Consult these files before implementing fea
 5. **Query Objects:** Extract complex scopes or SQL chains into Query Objects or dedicated scopes.
 6. **Stable per-entity randomization:** When a collection must be displayed in a randomized but stable order for a given entity (e.g. same evaluator always sees the same question sequence), use `Array#shuffle(random: Random.new(entity.id))`. Always sort the collection by `id` first to guarantee a deterministic pre-shuffle input — without this, the shuffle output is not reproducible across Ruby versions or AR query order changes.
 7. **PostgreSQL boolean comparisons in migrations:** In raw SQL within `execute(<<-SQL)` blocks, NEVER compare boolean columns using integer literals (`= 1`, `= 0`). PostgreSQL requires `= TRUE` / `= FALSE`. SQLite silently coerces integers to booleans, masking this bug locally. Always use `= TRUE` or `= FALSE` in migration SQL.
+8. **Value Objects for Domain Telemetry:** Always encapsulate physiological telemetry (e.g., Weight, Measurement) and strict business identifiers (e.g., Role, Timezone) into dedicated Value Object classes instead of allowing them to flow as native primitive types (Strings, Floats, Integers) in Models or Controllers. This ensures fail-fast assertions at the domain edges.
 
 # TESTING (RSpec)
 1. **Structure:** Arrange, Act, Assert.

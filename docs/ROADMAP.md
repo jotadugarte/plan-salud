@@ -8,6 +8,7 @@ Things done and things left to do. Update this when finishing branches; use `roa
 
 ## Done
 - [x] Estandarización de interfaz (Neumorfismo Responsivo) — 2026-04-11
+- [x] Migrate HTML App to Rails + Hotwire + SQLite — 2026-04-14
 
 ## In Progress
 *(No items currently in progress)*

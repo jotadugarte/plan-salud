@@ -1,24 +1,13 @@
-# System Architecture & Boundaries
+# SYSTEM_ARCHITECTURE.md
 
-**Purpose:** This document defines the unchangeable technical laws of the project. AI agents are strictly forbidden from proposing or implementing solutions that violate these boundaries unless an explicit Architectural Decision Record (ADR) is approved.
+## The Absolute Stack
+- Base: Ruby 3.x, Rails 8 (Omakase configs)
+- Database: SQLite (Dev/Test), PostgreSQL (Prod)
+- Deployment: Kamal
+- Frontend CSS: TailwindCSS + inline Neumorphism legacy transitions
+- Frontend JS: Hotwire (Turbo & Stimulus JS)
 
-## 1. The Technology Stack
-* **Language/Runtime:** [e.g., TypeScript 5.x / Ruby 3.x]
-* **Core Framework:** [e.g., Expo React Native / Ruby on Rails 8]
-* **Primary Database:** [e.g., SQLite via Drizzle ORM / PostgreSQL]
-* **Styling/UI Engine:** [e.g., Tamagui / CSS Variables & BEM]
-
-## 2. Architectural Paradigm
-* **Design Pattern:** [e.g., Local-First Offline Sync / Service-Object Backend]
-* **State Management:** [e.g., React Query for Server State, Zustand for UI State]
-* **API Paradigm:** [e.g., RESTful JSON / GraphQL]
-
-## 3. The "Kill List" (Forbidden Patterns)
-*AI Agents MUST NOT use or suggest the following under any circumstances:*
-* 🚫 **[Forbidden Tech 1]:** [e.g., Tailwind CSS - Use Tamagui tokens instead]
-* 🚫 **[Forbidden Tech 2]:** [e.g., Redux - Use React Query]
-* 🚫 **[Forbidden Pattern]:** [e.g., Fat Controllers - All business logic must be in Service Objects]
-
-## 4. Environment & Infrastructure
-* **Deployment Target:** [e.g., iOS/Android App Stores / Kamal to Bare Metal]
-* **Secrets Management:** [e.g., Expo SecureStore / Rails Credentials]
+## Core Architectural Boundaries
+1. **Frontend JS Isolation**: STRICTLY FORBIDDEN to use jQuery or raw inline `<script>` tags. All interactive toggles and dynamic UI (e.g., dashboard rendering, modals) MUST be encapsulated within standardized `Stimulus.js` controllers using target/action paradigms.
+2. **Multi-tenancy Access Firewall**: All domain records read or mutated over HTTP MUST be strictly accessed through `Current.user` abstractions to prevent cross-tenant data leakage.
+3. **Data Integrity**: Side-effects must remain in `before_validation` hooks with clear Value Objects for scalar types. Enforcing Domain Driven Design principles explicitly.
