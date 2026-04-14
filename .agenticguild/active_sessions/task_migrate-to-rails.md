@@ -37,7 +37,7 @@ Convert a static HTML/JS/CSS "Plan Integral de Salud" personal app into a multi-
   <description>Setup Rails green test baseline</description>
   <action>Run bin/rails test to ensure the environment is healthy before writing any code. If Rails hasn't been initialized, initialize it with SQLite.</action>
 </step>
-<step id="2" status="pending">
+<step id="2" status="complete">
   <description>Write a failing test for User Authentication & Timezones</description>
   <action>Generate a test ensuring a User object requires an email, password, and timezone.</action>
 </step>
