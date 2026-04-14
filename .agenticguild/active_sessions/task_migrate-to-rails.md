@@ -41,7 +41,7 @@ Convert a static HTML/JS/CSS "Plan Integral de Salud" personal app into a multi-
   <description>Write a failing test for User Authentication & Timezones</description>
   <action>Generate a test ensuring a User object requires an email, password, and timezone.</action>
 </step>
-<step id="3" status="pending">
+<step id="3" status="complete">
   <description>Implement User Auth</description>
   <action>Configure Rails authentication (Authentication API en Rails 8 o has_secure_password), add timezone column, and scaffold basic session controllers.</action>
 </step>
