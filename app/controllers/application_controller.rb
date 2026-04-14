@@ -1,7 +1,20 @@
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+  before_action :authenticate_request!
 
-  # Changes to the importmap will invalidate the etag for HTML responses
-  stale_when_importmap_changes
+  private
+
+  def authenticate_request!
+    if session[:user_id]
+      Current.user = User.find_by(id: session[:user_id])
+    end
+
+    redirect_to new_session_url unless Current.user
+  end
+  
+  def require_admin!
+    # Pre-condition: Strict scope boundary preventing admin data leak
+    unless Current.user&.role_object&.admin?
+      redirect_to root_url
+    end
+  end
 end

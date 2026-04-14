@@ -49,11 +49,11 @@ Convert a static HTML/JS/CSS "Plan Integral de Salud" personal app into a multi-
   <description>Write failing tests for Models (Phase, Exercise, Recipe, DailyPlan, Logs)</description>
   <action>Create ActiveSupport::TestCase files defining relationships and validations. Specifically verify that WorkoutLog captures snapshots of Exercise metrics.</action>
 </step>
-<step id="5" status="pending">
+<step id="5" status="complete">
   <description>Implement Models and DB Migrations</description>
   <action>Generate models and migrations for the core domain. Setup associations (`has_many :workout_logs`). Ensure `WorkoutLog` copies metrics natively.</action>
 </step>
-<step id="6" status="pending">
+<step id="6" status="complete">
   <description>Write failing tests for Core Controllers (Tracking & Admin)</description>
   <action>Test that users can only access their own logs (Privacy). Test that admins can access Master catalogs.</action>
 </step>

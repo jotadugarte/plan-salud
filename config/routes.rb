@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  # Session routes
   resource :session, only: [:new, :create, :destroy]
 
-  # Dashboard/Root route needed to satisfy test redirect
+  resources :workout_logs, only: [:index, :show]
+
+  namespace :admin do
+    resources :exercises, only: [:index]
+  end
+
   get "dashboard", to: "dashboard#index"
   root "dashboard#index"
 end

@@ -1,5 +1,7 @@
 # [REQ-AUTH-002]
 class SessionsController < ApplicationController
+  skip_before_action :authenticate_request!, only: [:new, :create]
+
   def new
   end
 
