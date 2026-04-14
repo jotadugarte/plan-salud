@@ -45,7 +45,7 @@ Convert a static HTML/JS/CSS "Plan Integral de Salud" personal app into a multi-
   <description>Implement User Auth</description>
   <action>Configure Rails authentication (Authentication API en Rails 8 o has_secure_password), add timezone column, and scaffold basic session controllers.</action>
 </step>
-<step id="4" status="pending">
+<step id="4" status="complete">
   <description>Write failing tests for Models (Phase, Exercise, Recipe, DailyPlan, Logs)</description>
   <action>Create ActiveSupport::TestCase files defining relationships and validations. Specifically verify that WorkoutLog captures snapshots of Exercise metrics.</action>
 </step>

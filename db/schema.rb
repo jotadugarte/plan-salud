@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_14_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_030002) do
+  create_table "exercises", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "default_reps", null: false
+    t.integer "default_rest_seconds"
+    t.integer "default_series", null: false
+    t.decimal "default_weight", precision: 6, scale: 2
+    t.text "description"
+    t.string "name", null: false
+    t.json "tags"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "phases", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "duration_days", null: false
+    t.string "name", null: false
+    t.json "rules"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", null: false
@@ -19,4 +39,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_000000) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  create_table "workout_logs", force: :cascade do |t|
+    t.integer "completed_reps", null: false
+    t.integer "completed_series", null: false
+    t.decimal "completed_weight", precision: 6, scale: 2
+    t.datetime "created_at", null: false
+    t.integer "exercise_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["exercise_id"], name: "index_workout_logs_on_exercise_id"
+    t.index ["user_id"], name: "index_workout_logs_on_user_id"
+  end
+
+  add_foreign_key "workout_logs", "exercises"
+  add_foreign_key "workout_logs", "users"
 end
