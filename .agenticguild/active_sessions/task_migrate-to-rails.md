@@ -33,7 +33,7 @@ Convert a static HTML/JS/CSS "Plan Integral de Salud" personal app into a multi-
 - **Measurement**: Captures metrics like repetitions, distance, or duration with their appropriate units.
 
 <implementation_plan>
-<step id="1" status="pending">
+<step id="1" status="complete">
   <description>Setup Rails green test baseline</description>
   <action>Run bin/rails test to ensure the environment is healthy before writing any code. If Rails hasn't been initialized, initialize it with SQLite.</action>
 </step>
