@@ -61,7 +61,7 @@ Convert a static HTML/JS/CSS "Plan Integral de Salud" personal app into a multi-
   <description>Implement Controllers & Stimulus</description>
   <action>Build endpoints for Daily Check-ins. Add Stimulus controllers for UI toggles (expanding recipes/phases).</action>
 </step>
-<step id="8" status="pending">
+<step id="8" status="complete">
   <description>Port Frontend Templates (Neumorphism UI)</description>
   <action>Refactor the existing `index.html` Vanilla CSS and structure into Rails layouts/views, preserving the exact aesthetic via asset pipeline.</action>
 </step>
