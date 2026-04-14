@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resource :session, only: [:new, :create, :destroy]
+  resource :session, only: [ :new, :create, :destroy ]
 
-  resources :workout_logs, only: [:index, :show, :create]
+  resources :workout_logs, only: [ :index, :show, :create ]
 
   namespace :admin do
-    resources :exercises, only: [:index]
+    resources :exercises, only: [ :index ]
   end
 
   get "dashboard", to: "dashboard#index"

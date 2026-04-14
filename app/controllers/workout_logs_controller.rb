@@ -10,13 +10,15 @@ class WorkoutLogsController < ApplicationController
   end
 
   def create
-    # Pre-condition assertion (CbC)
-    raise ArgumentError, "Workout log payload is completely missing" if params[:workout_log].blank?
+    # Pre-condition assertion via gentle rescue
+    if params[:workout_log].blank?
+      return redirect_to workout_logs_url, alert: t(".missing_payload", default: "Falta información requerida.")
+    end
 
     @workout_log = Current.user.workout_logs.build(workout_log_params)
 
     if @workout_log.save
-      redirect_to workout_logs_url, notice: "Workout log successfully recorded!"
+      redirect_to workout_logs_url, notice: t(".success", default: "¡Registro guardado exitosamente!")
     else
       @workout_logs = Current.user.workout_logs
       render :index, status: :unprocessable_entity

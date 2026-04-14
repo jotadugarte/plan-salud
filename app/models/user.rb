@@ -23,13 +23,13 @@ class User < ApplicationRecord
 
   def timezone_must_be_valid
     if timezone.present? && !Timezone.valid?(timezone)
-      errors.add(:timezone, "is invalid")
+      errors.add(:timezone, :invalid)
     end
   end
 
   def role_must_be_valid
     if role.present? && !Role.valid?(role)
-      errors.add(:role, "is invalid")
+      errors.add(:role, :invalid)
     end
   end
 end

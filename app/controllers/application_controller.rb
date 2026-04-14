@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
     redirect_to new_session_url unless Current.user
   end
-  
+
   def require_admin!
     # Pre-condition: Strict scope boundary preventing admin data leak
     unless Current.user&.role_object&.admin?

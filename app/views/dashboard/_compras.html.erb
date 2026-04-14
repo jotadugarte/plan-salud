@@ -1,0 +1,32 @@
+<!-- ===== COMPRAS ===== -->
+    <div id="compras" class="section">
+      <div class="section-title">Lista de compras</div>
+      <div class="section-sub">Una compra semanal tipo para cada fase · Marcá lo que ya tenés</div>
+
+      <div class="sub-tabs" id="shop-tabs">
+        <button class="sub-tab active" onclick="showSubTab('shop-f1','shop-tabs',this)">Fase 1 (sem 1–4)</button>
+        <button class="sub-tab" onclick="showSubTab('shop-f2','shop-tabs',this)">Fase 2 (sem 5–10)</button>
+        <button class="sub-tab" onclick="showSubTab('shop-f3','shop-tabs',this)">Fase 3 (sem 11+)</button>
+        <button class="sub-tab" onclick="showSubTab('shop-base','shop-tabs',this)">Despensa base</button>
+      </div>
+
+      <div id="shop-f1" class="sub-panel active">
+        <div class="tip">Esta lista cubre una semana tipo de la Fase 1. Comprar el domingo para tener todo listo el
+          lunes.</div>
+        <div id="list-shop-f1"></div>
+      </div>
+      <div id="shop-f2" class="sub-panel">
+        <div class="tip">Fase 2: más variedad de vegetales, se introduce la lenteja y la espinaca.</div>
+        <div id="list-shop-f2"></div>
+      </div>
+      <div id="shop-f3" class="sub-panel">
+        <div class="tip">Fase 3: menos arroz, más vegetales, se reduce el pan. Proteínas de alta calidad.</div>
+        <div id="list-shop-f3"></div>
+      </div>
+      <div id="shop-base" class="sub-panel">
+        <div class="info-box">Estas cosas siempre deben estar en la casa. Comprar cuando se acaben.</div>
+        <div id="list-shop-base"></div>
+      </div>
+    </div>
+
+    

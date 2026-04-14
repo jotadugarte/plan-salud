@@ -1,0 +1,461 @@
+<!-- ===== EJERCICIO ===== -->
+    <div id="ejercicio" class="section">
+      <div class="section-title">Plan de ejercicio</div>
+      <div class="section-sub">3 fases progresivas · diseñado para hipertensión controlada y hombro operado</div>
+
+      <div class="warn">⚠️ Hombro operado: evitar press por encima de la cabeza con peso. Nada de press militar con
+        carga. · Hipertensión: si sentís dolor de pecho, mareos o cefalea fuerte, parar inmediatamente.</div>
+
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-val">30 min</div>
+          <div class="metric-lbl">por sesión al inicio</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">4×</div>
+          <div class="metric-lbl">semana mínimo</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">5 pm</div>
+          <div class="metric-lbl">hora ideal (post trabajo)</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.5rem">
+        <div class="label" style="margin-bottom:8px">Seleccionar fase actual</div>
+        <div class="sub-tabs" id="ejercicio-tabs">
+          <button id="btn-ejercicio-1" class="sub-tab" onclick="window._filterEjercicioFase(1, this)">Fase 1 — Despertar
+            el cuerpo</button>
+          <button id="btn-ejercicio-2" class="sub-tab" onclick="window._filterEjercicioFase(2, this)">Fase 2 —
+            Aumentando carga</button>
+          <button id="btn-ejercicio-3" class="sub-tab" onclick="window._filterEjercicioFase(3, this)">Fase 3 —
+            Mantenimiento</button>
+        </div>
+      </div>
+
+      <!-- FASE 1 -->
+      <div class="phase-card">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-num" style="background:var(--g100);color:var(--g900)">1</div>
+          <div>
+            <div class="title" style="margin:0">Fase 1 — Despertar el cuerpo</div>
+            <div style="font-size:13px;color:var(--text2)">Semanas 1–4 · 2 kg</div>
+          </div>
+          <span style="margin-left:auto;color:var(--text3);font-size:18px">▾</span>
+        </div>
+        <div class="phase-body open">
+          <div class="tip">Objetivo de esta fase: construir el hábito, no el músculo. Que tu cuerpo aprenda los
+            movimientos y el hombro no proteste. Va a sentirse fácil — eso es intencional.</div>
+
+          <div style="margin-bottom:1rem">
+            <div class="label">Esquema semanal</div>
+            <div class="week-grid">
+              <div class="wday on">L<br><span style="font-size:9px">piernas</span></div>
+              <div class="wday on">M<br><span style="font-size:9px">brazos</span></div>
+              <div class="wday lite">X<br><span style="font-size:9px">camina</span></div>
+              <div class="wday on">J<br><span style="font-size:9px">brazos</span></div>
+              <div class="wday on">V<br><span style="font-size:9px">piernas</span></div>
+              <div class="wday rest">S<br><span style="font-size:9px">libre</span></div>
+              <div class="wday rest">D<br><span style="font-size:9px">libre</span></div>
+            </div>
+          </div>
+
+          <div class="label" style="margin-bottom:.5rem">Día A — Tren superior (martes y jueves)</div>
+          <div class="ex-card">
+            <div class="ex-name">Curl de bíceps</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">3</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">12</div>
+                <div class="ex-stat-lbl">reps</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">60 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">2 kg</div>
+                <div class="ex-stat-lbl">peso</div>
+              </div>
+            </div>
+            <div class="ex-note">Codos pegados al cuerpo. Sube 2 segundos, baja 3 segundos. Sentado o de pie.</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-name">Remo con mancuerna (espalda)</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">3</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">10</div>
+                <div class="ex-stat-lbl">por lado</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">60 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">2 kg</div>
+                <div class="ex-stat-lbl">peso</div>
+              </div>
+            </div>
+            <div class="ex-note">Apoyá una mano y rodilla en una silla. Jalá la mancuerna hacia la cadera, no hacia el
+              hombro. Espalda recta.</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-name">Press de pecho en el piso <span class="badge badge-a">hombro: seguro</span></div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">3</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">12</div>
+                <div class="ex-stat-lbl">reps</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">60 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">2 kg</div>
+                <div class="ex-stat-lbl">peso</div>
+              </div>
+            </div>
+            <div class="ex-note">Acostado en el piso, rodillas dobladas. El piso limita el rango de movimiento y protege
+              el hombro automáticamente. Empujá hacia el techo.</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-name">Elevación lateral de hombro <span class="badge badge-r">muy suave</span></div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">2</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">10</div>
+                <div class="ex-stat-lbl">reps</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">60 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">2 kg</div>
+                <div class="ex-stat-lbl">máximo</div>
+              </div>
+            </div>
+            <div class="ex-note">Solo hasta la altura del hombro — no más arriba. Si hay molestia en el hombro operado,
+              hacerlo sin peso. Nunca con dolor.</div>
+          </div>
+
+          <div class="label" style="margin-bottom:.5rem;margin-top:1rem">Día B — Tren inferior (lunes y viernes)</div>
+          <div class="ex-card">
+            <div class="ex-name">Sentadilla con mancuernas</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">3</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">12</div>
+                <div class="ex-stat-lbl">reps</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">60 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">2 kg</div>
+                <div class="ex-stat-lbl">peso</div>
+              </div>
+            </div>
+            <div class="ex-note">Pies al ancho de los hombros, mancuernas colgando a los lados. Bajá como si fueras a
+              sentarte en una silla. Rodillas no pasan la punta del pie. El ejercicio que más calorías quema.</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-name">Estocada en el lugar</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">3</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">10</div>
+                <div class="ex-stat-lbl">por pierna</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">60 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">2 kg</div>
+                <div class="ex-stat-lbl">peso</div>
+              </div>
+            </div>
+            <div class="ex-note">Un pie adelante, uno atrás. Bajá la rodilla trasera hacia el suelo. Si perdés el
+              equilibrio, hacerlo sin peso primero apoyando en la pared.</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-name">Plancha abdominal</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">3</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">20 s</div>
+                <div class="ex-stat-lbl">duración</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">45 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">0 kg</div>
+                <div class="ex-stat-lbl">siempre</div>
+              </div>
+            </div>
+            <div class="ex-note">Apoyado en codos y puntillas. Cuerpo recto como tabla. Añadí 5 segundos cada semana. No
+              requiere cargar con el hombro.</div>
+          </div>
+
+          <div class="label" style="margin-bottom:.5rem;margin-top:1rem">Cardio — miércoles y fin de semana</div>
+          <div class="ex-card">
+            <div class="ex-name">Cuerda de saltar — intervalos</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">5</div>
+                <div class="ex-stat-lbl">rondas</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">30 s</div>
+                <div class="ex-stat-lbl">saltando</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">90 s</div>
+                <div class="ex-stat-lbl">caminando</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">10 min</div>
+                <div class="ex-stat-lbl">total</div>
+              </div>
+            </div>
+            <div class="ex-note">Al terminar las rondas, caminar 2 minutos tranquilo para bajar la frecuencia cardíaca.
+              Si te cuesta el aire, alargar el descanso a 2 minutos.</div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-name">Caminata con Pixel (mediodía)</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">10–15</div>
+                <div class="ex-stat-lbl">minutos</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">12 pm</div>
+                <div class="ex-stat-lbl">hora ideal</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">diario</div>
+                <div class="ex-stat-lbl">frecuencia</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">ritmo</div>
+                <div class="ex-stat-lbl">cómodo</div>
+              </div>
+            </div>
+            <div class="ex-note">Salir al mediodía durante el descanso. Paso cómodo — no correr. Pixel como motivación
+              diaria. Meta semana 1: 7,000 pasos/día en el reloj Huawei.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FASE 2 -->
+      <div class="phase-card">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-num" style="background:var(--blue-bg);color:var(--blue)">2</div>
+          <div>
+            <div class="title" style="margin:0">Fase 2 — Construir resistencia</div>
+            <div style="font-size:13px;color:var(--text2)">Semanas 5–10 · 2–5 kg</div>
+          </div>
+          <span style="margin-left:auto;color:var(--text3);font-size:18px">▾</span>
+        </div>
+        <div class="phase-body">
+          <div class="tip">El cuerpo ya conoce los movimientos. Ahora aumentamos el peso en piernas y espalda (5 kg) y
+            la duración del cardio. El hombro sigue con 2 kg.</div>
+          <div class="ex-card">
+            <div class="ex-name">Cambios vs Fase 1</div>
+            <div class="body-text" style="font-size:13px">
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Sentadilla, estocada y peso muerto: subir a <strong>5 kg</strong>.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Remo de espalda: subir a <strong>5 kg</strong>.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Curl de bíceps: subir a <strong>5 kg</strong>.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot da"></div>
+                <div>Elevación lateral de hombro: quedarse en <strong>2 kg</strong> si hay molestia.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Agregar <strong>peso muerto rumano</strong>: 3×12 con 5 kg.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Parque: 2 visitas por semana, empezar a usar las barras de agarre.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Cuerda: subir a 1 min saltando / 1 min caminando × 8 rondas.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Caminata con Pixel: 20 min. Meta de pasos: 10,000/día.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Plancha: ir aumentando a 30–40 segundos.</div>
+              </div>
+            </div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-name">Nuevo: Peso muerto rumano</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">3</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">12</div>
+                <div class="ex-stat-lbl">reps</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">60 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">5 kg</div>
+                <div class="ex-stat-lbl">peso</div>
+              </div>
+            </div>
+            <div class="ex-note">Parado, mancuernas al frente. Doblá la cadera hacia adelante (no la espalda), bajando
+              las mancuernas por las piernas hasta la rodilla. Sentís tensión en la parte trasera del muslo — correcto.
+            </div>
+          </div>
+          <div class="ex-card">
+            <div class="ex-name">Nuevo: Elevación de talones (pantorrillas)</div>
+            <div class="ex-stats">
+              <div class="ex-stat">
+                <div class="ex-stat-val">3</div>
+                <div class="ex-stat-lbl">series</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">15</div>
+                <div class="ex-stat-lbl">reps</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">45 s</div>
+                <div class="ex-stat-lbl">descanso</div>
+              </div>
+              <div class="ex-stat">
+                <div class="ex-stat-val">sin peso</div>
+                <div class="ex-stat-lbl">inicio</div>
+              </div>
+            </div>
+            <div class="ex-note">Parado, subí en la punta del pie lo más alto posible. Una mano en la pared para
+              equilibrio. Podés añadir mancuernas cuando sea fácil.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FASE 3 -->
+      <div class="phase-card">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-num" style="background:#EEEDFE;color:#534AB7">3</div>
+          <div>
+            <div class="title" style="margin:0">Fase 3 — Progresión real</div>
+            <div style="font-size:13px;color:var(--text2)">Semanas 11+ · 5–10 kg</div>
+          </div>
+          <span style="margin-left:auto;color:var(--text3);font-size:18px">▾</span>
+        </div>
+        <div class="phase-body">
+          <div class="tip">Si llegaste acá, ya sos una persona diferente. El cuerpo sabe moverse, el hábito está
+            formado. Ahora intensificamos.</div>
+          <div class="ex-card">
+            <div class="ex-name">Cambios vs Fase 2</div>
+            <div class="body-text" style="font-size:13px">
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Sentadilla, estocada, peso muerto: subir a <strong>10 kg</strong> cuando el cuerpo lo pida.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Remo de espalda: subir a <strong>10 kg</strong>.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Cuerda: llegar a series de <strong>3–5 minutos continuos</strong>. Mezclar ritmos.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Agregar caminatas largas con tu esposo los fines de semana (30–45 min).</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Plancha: meta de <strong>60 segundos</strong> continuos.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Parque: 3 veces por semana. Trabajar barras y equipos de cuerpo completo.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot dg"></div>
+                <div>Agregar <strong>elevaciones de piernas</strong> en el piso: 3×15 para abdomen.</div>
+              </div>
+              <div class="dot-row">
+                <div class="dot da"></div>
+                <div>Hombro: evaluar con tu médica si podés aumentar peso, no antes.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-green">
+        <div class="label">Calentamiento obligatorio — 5 minutos siempre</div>
+        <div class="body-text" style="margin-top:6px">
+          <div class="dot-row">
+            <div class="dot dg"></div>
+            <div>Rotaciones de cuello: 10 círculos lentos cada lado.</div>
+          </div>
+          <div class="dot-row">
+            <div class="dot dg"></div>
+            <div>Rotaciones de hombro: 10 hacia adelante, 10 hacia atrás. Brazos relajados.</div>
+          </div>
+          <div class="dot-row">
+            <div class="dot dg"></div>
+            <div>Marcha en el lugar: 1 minuto levantando rodillas.</div>
+          </div>
+          <div class="dot-row">
+            <div class="dot dg"></div>
+            <div>Rotación de muñecas y tobillos: 10 círculos cada uno.</div>
+          </div>
+          <div class="dot-row">
+            <div class="dot dg"></div>
+            <div>Estiramiento cuádriceps: 20 s cada pierna, de pie con apoyo en pared.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    

@@ -9,7 +9,7 @@ class Timezone
 
   def self.valid?(name)
     return false unless name.is_a?(String)
-    
+
     !!ActiveSupport::TimeZone[name]
   end
 

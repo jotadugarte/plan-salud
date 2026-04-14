@@ -23,7 +23,7 @@ class DailyCheckInsTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to workout_logs_url
-    
+
     log = WorkoutLog.last
     assert_equal @user.id, log.user_id
     assert_equal @exercise.id, log.exercise_id

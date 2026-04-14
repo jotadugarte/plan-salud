@@ -1,0 +1,280 @@
+<!-- ===== MENÚ ===== -->
+    <div id="menu" class="section">
+      <div class="section-title">Menú semanal</div>
+      <div class="section-sub">6 rotaciones de menú · 2 por fase · se alternan semana a semana</div>
+
+      <div class="warn">Condiciones a respetar siempre: poca sal (hipertensión), sin toronja/pomelo (Lovastatina), café
+        no con el estómago vacío (Omeprazol). Coca Cola Zero: máx 1/día, preferiblemente antes de las 4 pm.</div>
+
+      <div class="sub-tabs" id="fase-tabs">
+        <button class="sub-tab active" onclick="showMenuFase('f1a',this,'fase-tabs')">Fase 1 — Semanas 1 y 3</button>
+        <button class="sub-tab" onclick="showMenuFase('f1b',this,'fase-tabs')">Fase 1 — Semanas 2 y 4</button>
+        <button class="sub-tab" onclick="showMenuFase('f2a',this,'fase-tabs')">Fase 2 — Semanas 5,7,9</button>
+        <button class="sub-tab" onclick="showMenuFase('f2b',this,'fase-tabs')">Fase 2 — Semanas 6,8,10</button>
+        <button class="sub-tab" onclick="showMenuFase('f3a',this,'fase-tabs')">Fase 3 — Semanas 11,13,15</button>
+        <button class="sub-tab" onclick="showMenuFase('f3b',this,'fase-tabs')">Fase 3 — Semanas 12,14+</button>
+      </div>
+
+      <div id="f1a" class="sub-panel active" data-days='[
+    {"id":"f1a","day":"Lunes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos revueltos con arepa","desc":"2 huevos revueltos + 1 arepa pequeña + café con leche descremada","note":"Proteína desde temprano. Llena hasta el almuerzo.","recipe":"huevos-revueltos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 banano","desc":"Fruta entera — no jugo"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pechuga a la plancha con arroz y ensalada","desc":"Pechuga de pollo a la plancha + ½ taza arroz integral + ensalada de lechuga y tomate con limón","note":"Día de oficina — llevar en tupper o buscar opción similar.","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles y arepa","desc":"2 huevos fritos + 1 taza frijoles negros + 1 arepa pequeña","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f1a","day":"Martes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con fruta","desc":"½ taza avena cocida con leche descremada + 1 fruta picada adentro + café","note":"Sin azúcar o con muy poca — la fruta endulza.","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Maní sin sal","desc":"Un puño cerrado — no más. Sin sal, sin azúcar."},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Atún con arroz, chayote y aguacate","desc":"Atún en agua + ½ taza arroz + chayote cocido + ¼ aguacate","recipe":"atun-simple"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich de pollo","desc":"Pollo desmenuzado en pan integral + lechuga + tomate","recipe":"sanwich-pollo"}
+
+    ]},
+    {"id":"f1a","day":"Miércoles","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos cocidos con tostada","desc":"2 huevos cocidos + 1 tostada de pan integral + café","recipe":"huevos-cocidos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 manzana","desc":"Fruta entera"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Carne molida guisada con arroz y brócoli","desc":"Carne molida guisada (poca sal) + ½ taza arroz + brócoli o zanahoria cocida","recipe":"carne-molida"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de verduras con pollo","desc":"Sopa de pollo con chayote, zanahoria, papa pequeña y apio","note":"Ideal cocinarla en cantidad y que alcance para el almuerzo del jueves.","recipe":"sopa-pollo-verduras"}
+    ]},
+    {"id":"f1a","day":"Jueves","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con leche","desc":"½ taza avena + leche descremada + café","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 banano"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Tilapia al horno","desc":"Tilapia al horno con limón y ajo + ½ taza arroz + ensalada de repollo con zanahoria","recipe":"tilapia-horno"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles y arepa","desc":"2 huevos + frijoles + 1 arepa pequeña","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f1a","day":"Viernes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos revueltos con fruta","desc":"2 huevos revueltos + café + 1 fruta","recipe":"huevos-revueltos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Maní sin sal","desc":"Un puño cerrado"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pollo con gallo pinto y aguacate","desc":"Pollo a la plancha + gallo pinto (½ taza) + ¼ aguacate + ensalada","recipe":"gallo-pinto"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena — día flexible","name":"Pizza o hamburguesa","desc":"1 vez por semana planificada. Disfrutarla sin culpa — está dentro del plan.","note":"Regla: solo 1 vez por semana, no más."}
+    ]},
+    {"id":"f1a","day":"Sábado","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Gallo pinto con huevo frito","desc":"Gallo pinto + 1 huevo frito + café — el desayuno tico completo","recipe":"gallo-pinto"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Olla de carne casera","desc":"Olla de carne con papa, zanahoria, chayote y yuca — porciones normales","recipe":"olla-carne"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich integral de atún","desc":"Atún en agua + pan integral + lechuga + aguacate","recipe":"sanwich-atun"}
+    ]},
+    {"id":"f1a","day":"Domingo","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con fruta","desc":"Avena + leche + café","recipe":"avena-basica"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo (cocinar doble)","name":"Pollo asado al horno con vegetales","desc":"Pollo asado + arroz integral + vegetales asados (zanahoria, chayote, brócoli)","note":"Cocinar el doble — el almuerzo del lunes queda listo.","recipe":"pollo-asado"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa o sobras","desc":"Sopa de lo que sobre del almuerzo o: 2 huevos + arepa + frijoles"}
+    ]}
+  ]'></div>
+
+      <div id="f1b" class="sub-panel" data-days='[
+    {"id":"f1b","day":"Lunes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con leche","desc":"½ taza avena + leche descremada + café","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 naranja","desc":"Fruta entera — sin jugo"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Tilapia a la plancha con chayote","desc":"Tilapia a la plancha + ½ taza arroz integral + chayote cocido","recipe":"tilapia-horno"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Tortilla de huevos con frijoles","desc":"Tortilla de 2 huevos en sartén + frijoles","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f1b","day":"Martes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos cocidos con arepa","desc":"2 huevos cocidos + 1 arepa + café","recipe":"huevos-cocidos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 manzana"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pollo desmenuzado guisado","desc":"Pollo desmenuzado guisado + ½ taza arroz + zanahoria cocida","recipe":"pollo-desmenuzado"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich de pollo con aguacate","desc":"Pollo en pan integral + ¼ aguacate + lechuga","recipe":"sanwich-pollo"}
+    ]},
+    {"id":"f1b","day":"Miércoles","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con fruta","desc":"Avena + leche + 1 fruta picada + café","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Maní sin sal"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Bistec delgado con arroz y brócoli","desc":"Bistec delgado a la plancha + ½ taza arroz integral + brócoli al vapor","recipe":"bistec-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos fritos con frijoles y arepa","desc":"2 huevos fritos + frijoles + 1 arepa","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f1b","day":"Jueves","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos revueltos con tostada","desc":"2 huevos revueltos + 1 tostada integral + café","recipe":"huevos-revueltos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 banano"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Atún con arroz y remolacha","desc":"Atún en agua + ½ taza arroz + ensalada de remolacha y zanahoria","recipe":"atun-simple"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de verduras con pollo","desc":"Sopa del miércoles — hacer en cantidad para que alcance","recipe":"sopa-pollo-verduras"}
+    ]},
+    {"id":"f1b","day":"Viernes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Gallo pinto con huevo","desc":"Gallo pinto + 1 huevo frito + café","recipe":"gallo-pinto"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 fruta"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pollo a la plancha con papa","desc":"Pollo a la plancha + papa cocida pequeña + ensalada verde","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena — día flexible","name":"Comida libre planificada","desc":"Pizza, hamburguesa o lo que se antoje. 1 vez por semana."}
+    ]},
+    {"id":"f1b","day":"Sábado","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con leche","desc":"Avena + leche + café"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Sopa de pollo con vegetales","desc":"Sopa sustanciosa de pollo con chayote, papa, zanahoria","recipe":"sopa-pollo-verduras"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles y arepa","desc":"Clásico sencillo para cerrar el sábado","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f1b","day":"Domingo","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos con arepa","desc":"2 huevos + 1 arepa + café","recipe":"huevos-revueltos"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo (cocinar doble)","name":"Arroz con pollo casero","desc":"Arroz con pollo casero con mucho vegetal integrado","note":"Cocinar doble — almuerzo del lunes listo.","recipe":"arroz-con-pollo"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich integral + ensalada","desc":"Pan integral con lo que haya + ensalada"}
+    ]}
+  ]'></div>
+
+      <div id="f2a" class="sub-panel" data-days='[
+    {"id":"f2a","day":"Lunes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con chía","desc":"½ taza avena + leche + 1 tsp semillas de chía + fruta + café","note":"La chía da saciedad extra — no se nota el sabor.","recipe":"avena-choco"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Yogur natural sin azúcar","desc":"1 pote pequeño. Si no conseguís sin azúcar, maní sin sal."},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pechuga al horno con hierbas","desc":"Pechuga al horno con ajo, limón y orégano + ½ taza arroz integral + ensalada mixta + ½ aguacate","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Tortilla de espinaca con frijoles","desc":"2 huevos + espinaca salteada en tortilla + frijoles","recipe":"tortilla-espinaca"}
+    ]},
+    {"id":"f2a","day":"Martes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos pochados con arepa integral","desc":"2 huevos pochados + 1 arepa integral + café","recipe":"huevos-cocidos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Maní sin sal"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Tilapia al horno con vegetales al vapor","desc":"Tilapia al horno + ½ taza arroz + zanahoria y brócoli al vapor","recipe":"tilapia-horno"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de lenteja","desc":"Sopa de lenteja roja con zanahoria y cebolla — fácil y nutritiva","recipe":"sopa-lenteja"}
+    ]},
+    {"id":"f2a","day":"Miércoles","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Batido de avena y banano","desc":"½ taza avena + 1 banano + 1 taza leche descremada, licuado (sin azúcar)","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 manzana"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Carne molida con espinaca","desc":"Carne molida guisada + ½ taza arroz integral + espinaca salteada con ajo","recipe":"carne-molida"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles y arepa","desc":"2 huevos + frijoles + 1 arepa pequeña","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f2a","day":"Jueves","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con leche","desc":"Avena + leche + café","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 manzana"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pollo con limón y ajo","desc":"Pollo a la plancha con limón y ajo + ½ taza arroz integral + ensalada grande","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich de pollo con aguacate","desc":"Pollo desmenuzado + pan integral + ¼ aguacate + tomate","recipe":"sanwich-pollo"}
+    ]},
+    {"id":"f2a","day":"Viernes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos revueltos con fruta","desc":"2 huevos revueltos + café + 1 fruta","recipe":"huevos-revueltos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Puñado de nueces","desc":"Nueces o maní sin sal"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Atún con papa cocida y aguacate","desc":"Atún en agua + papa cocida pequeña + ensalada verde + ¼ aguacate","recipe":"atun-simple"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena — día flexible","name":"Comida libre planificada","desc":"1 vez por semana. Disfrutar sin culpa."}
+    ]},
+    {"id":"f2a","day":"Sábado","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Gallo pinto con huevo","desc":"Gallo pinto + huevo frito + café","recipe":"gallo-pinto"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Olla de carne con vegetales","desc":"Olla de carne con papa, zanahoria, chayote — mucho vegetal","recipe":"olla-carne"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich integral + ensalada","desc":"Pan integral + proteína + ensalada"}
+    ]},
+    {"id":"f2a","day":"Domingo","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con fruta","desc":"Avena + leche + fruta + café","recipe":"avena-basica"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo (cocinar doble)","name":"Pollo asado al horno con vegetales","desc":"Pollo asado + papas al horno + vegetales asados","note":"Cocinar doble — listo para el lunes.","recipe":"pollo-asado"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de lenteja o sobras","desc":"Sopa de lenteja del martes o lo que sobre del almuerzo","recipe":"sopa-lenteja"}
+    ]}
+  ]'></div>
+
+      <div id="f2b" class="sub-panel" data-days='[
+    {"id":"f2b","day":"Lunes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos revueltos con espinaca","desc":"2 huevos revueltos + espinaca salteada + 1 arepa + café","recipe":"huevos-revueltos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 fruta"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Tilapia con arroz y brócoli","desc":"Tilapia a la plancha + ½ taza arroz integral + brócoli al vapor","recipe":"tilapia-horno"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles y tortilla","desc":"2 huevos fritos + frijoles + 1 tortilla de maíz","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f2b","day":"Martes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con leche","desc":"Avena + leche + café","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Yogur + fruta picada","desc":"1 pote yogur natural + fruta picada adentro"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pollo desmenuzado con repollo","desc":"Pollo desmenuzado + ½ taza arroz + ensalada de repollo y zanahoria rallada","recipe":"pollo-desmenuzado"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de pollo y vegetales","desc":"Sopa sustanciosa para cerrar el martes","recipe":"sopa-pollo-verduras"}
+    ]},
+    {"id":"f2b","day":"Miércoles","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos cocidos con tostada","desc":"2 huevos cocidos + 1 tostada integral + café","recipe":"huevos-cocidos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Maní sin sal"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Bistec delgado con arroz y aguacate","desc":"Bistec delgado a la plancha + ½ taza arroz + ensalada + ¼ aguacate","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Gallo pinto con huevo","desc":"Gallo pinto + 1 huevo frito","recipe":"gallo-pinto"}
+    ]},
+    {"id":"f2b","day":"Jueves","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Batido de avena y banano","desc":"Avena + banano + leche licuados","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 manzana"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Tilapia con zanahoria cocida","desc":"Tilapia al horno + ½ taza arroz integral + zanahoria cocida","recipe":"tilapia-horno"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles","desc":"2 huevos + frijoles negros","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f2b","day":"Viernes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Gallo pinto con huevo","desc":"Gallo pinto + café","recipe":"gallo-pinto"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 fruta"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pollo a la plancha con papa","desc":"Pollo a la plancha + papa cocida + ensalada verde","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena — día flexible","name":"Comida libre planificada","desc":"1 vez por semana."}
+    ]},
+    {"id":"f2b","day":"Sábado","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con fruta","desc":"Avena + leche + café","recipe":"avena-basica"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Arroz con pollo casero","desc":"Arroz con pollo + vegetales integrados","recipe":"arroz-con-pollo"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich integral + ensalada","desc":"Pan integral + proteína + ensalada"}
+    ]},
+    {"id":"f2b","day":"Domingo","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos con arepa","desc":"2 huevos + 1 arepa + café","recipe":"huevos-revueltos"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo (cocinar doble)","name":"Pollo asado con vegetales asados","desc":"Pollo asado + vegetales asados + arroz integral","note":"Cocinar doble para el lunes.","recipe":"pollo-asado"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de pollo","desc":"Sopa o ensalada con lo que sobre","recipe":"sopa-pollo-verduras"}
+    ]}
+  ]'></div>
+
+      <div id="f3a" class="sub-panel" data-days='[
+    {"id":"f3a","day":"Lunes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Claras con yema y arepa","desc":"3 claras de huevo + 1 yema revueltas + 1 arepa pequeña + café","note":"Más proteína, menos grasa que 2 huevos completos.","recipe":"huevos-revueltos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Fruta + maní","desc":"1 fruta + pequeño puñado de maní sin sal"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pechuga al horno con 2 vegetales","desc":"Pechuga al horno + ½ taza arroz integral + brócoli + zanahoria + ¼ aguacate","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de lenteja con arepa","desc":"Sopa de lenteja + 1 arepa pequeña","recipe":"sopa-lenteja"}
+    ]},
+    {"id":"f3a","day":"Martes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con chía","desc":"Avena + leche + semillas de chía + café","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Yogur + fruta"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Tilapia con quinoa y espinaca","desc":"Tilapia a la plancha + ½ taza arroz integral o quinoa + espinaca salteada + ensalada","recipe":"tilapia-horno"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles negros","desc":"2 huevos + frijoles negros. Sin arepa — opcional.","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f3a","day":"Miércoles","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos revueltos con pimiento","desc":"2 huevos revueltos con pimiento y cebolla + café","recipe":"huevos-revueltos"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Maní sin sal"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pollo desmenuzado con vegetales","desc":"Pollo desmenuzado guisado + ½ taza arroz + variedad de vegetales","recipe":"pollo-desmenuzado"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich integral con pollo","desc":"Pollo + pan integral + ensalada verde","recipe":"sanwich-pollo"}
+    ]},
+    {"id":"f3a","day":"Jueves","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Batido proteico natural","desc":"Leche + avena + banano + 1 cda mantequilla de maní, licuado","recipe":"batido-proteico"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 fruta"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Atún con arroz integral y ensalada grande","desc":"Atún en agua + ½ taza arroz integral + ensalada amplia con mucho verde","recipe":"atun-simple"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles y arepa pequeña","desc":"2 huevos + frijoles + ½ arepa","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f3a","day":"Viernes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Gallo pinto con huevo","desc":"Gallo pinto + 1 huevo frito + café","recipe":"gallo-pinto"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 fruta"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Bistec con vegetales asados","desc":"Bistec delgado a la plancha + vegetales asados + ¼ taza arroz integral","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena — día flexible","name":"Comida libre planificada","desc":"1 vez por semana."}
+    ]},
+    {"id":"f3a","day":"Sábado","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con fruta","desc":"Avena + leche + café","recipe":"avena-basica"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Olla de carne con menos papa","desc":"Olla de carne con más zanahoria, chayote y menos papa que antes","recipe":"olla-carne"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa o sándwich","desc":"Sopa de sobras o sándwich integral"}
+    ]},
+    {"id":"f3a","day":"Domingo","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos con arepa","desc":"2 huevos + 1 arepa + café","recipe":"huevos-revueltos"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo (cocinar doble)","name":"Pollo asado con batata y vegetales","desc":"Pollo asado + batata asada (reemplaza parte del arroz) + vegetales asados","note":"Cocinar doble para el lunes.","recipe":"pollo-asado"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de lenteja","desc":"Sopa nutritiva de lenteja","recipe":"sopa-lenteja"}
+    ]}
+  ]'></div>
+
+      <div id="f3b" class="sub-panel" data-days='[
+    {"id":"f3b","day":"Lunes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos pochados con aguacate","desc":"2 huevos pochados + ½ aguacate en tostada integral + café","recipe":"huevos-pochados-aguacate"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Yogur natural"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pechuga grillada con ensalada grande","desc":"Pechuga grillada + ensalada grande con variedad + ¼ taza arroz integral","note":"Fase avanzada: reducimos el arroz, aumentamos el vegetal.","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de pollo y vegetales","desc":"Sopa nutritiva para cerrar el día","recipe":"sopa-pollo-verduras"}
+    ]},
+    {"id":"f3b","day":"Martes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con leche","desc":"Avena + leche + café","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Fruta + maní"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Tilapia al horno con 2 vegetales","desc":"Tilapia al horno + ½ taza arroz integral + 2 vegetales de tu elección","recipe":"tilapia-horno"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Huevos con frijoles","desc":"2 huevos + frijoles negros. Sin carbohidrato extra.","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f3b","day":"Miércoles","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Claras con vegetales salteados","desc":"3 claras + 1 yema + pimiento y espinaca salteados + café","recipe":"claras-vegetales"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 manzana"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Carne molida con ensalada de espinaca","desc":"Carne molida guisada + ensalada de espinaca + ¼ taza arroz","recipe":"carne-molida"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Arepa con frijoles y huevo","desc":"1 arepa pequeña + frijoles + 1 huevo","recipe":"huevos-frijoles-arepa"}
+    ]},
+    {"id":"f3b","day":"Jueves","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Batido proteico natural","desc":"Leche + avena + banano licuados + café","recipe":"avena-basica"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"Maní sin sal"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Tilapia con brócoli y zanahoria","desc":"Tilapia al horno + arroz integral + brócoli + zanahoria cocida","recipe":"tilapia-horno"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de lenteja","desc":"Sopa de lenteja nutritiva","recipe":"sopa-lenteja"}
+    ]},
+    {"id":"f3b","day":"Viernes","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Gallo pinto con huevo","desc":"Gallo pinto + café","recipe":"gallo-pinto"},
+      {"icon":"🍎","cls":"mi-s","lbl":"Media mañana","name":"1 fruta"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Pollo a la plancha con vegetales asados","desc":"Pollo a la plancha + vegetales asados variados + ¼ taza arroz","recipe":"pechuga-plancha"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena — día flexible","name":"Comida libre planificada","desc":"1 vez por semana."}
+    ]},
+    {"id":"f3b","day":"Sábado","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Avena con fruta","desc":"Avena + leche + café","recipe":"avena-basica"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo","name":"Arroz con pollo light","desc":"Arroz con pollo con menos arroz, más pollo y vegetales integrados","recipe":"arroz-con-pollo"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sándwich integral + ensalada","desc":"Pan integral + proteína + ensalada verde"}
+    ]},
+    {"id":"f3b","day":"Domingo","meals":[
+      {"icon":"☀️","cls":"mi-b","lbl":"Desayuno","name":"Huevos con arepa pequeña","desc":"2 huevos + 1 arepa + café","recipe":"huevos-revueltos"},
+      {"icon":"🍽️","cls":"mi-l","lbl":"Almuerzo (cocinar doble)","name":"Pollo asado con batata y vegetales","desc":"Pollo asado + batata asada + vegetales asados — cocinar doble","recipe":"pollo-asado"},
+      {"icon":"🌙","cls":"mi-d","lbl":"Cena","name":"Sopa de pollo o ensalada","desc":"Sopa o ensalada proteica con lo que sobre","recipe":"sopa-pollo-verduras"}
+    ]}
+  ]'></div>
+
+      <div id="day-display" style="margin-top:0"></div>
+    </div>
+
+    
