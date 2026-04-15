@@ -23,3 +23,18 @@ Visualizing key entity lifecycles and side-effects.
                         v
                  [Saved to DB]
 ```
+
+## 2. Habit Logging Lifecycle (Mi Día Dashboard)
+
+```text
+[User toggles Habit checkbox] -> {HabitLogsController}
+                                       |
+                                       v
+                          (Validates `logged_on` <= Date.today)
+                                       |
+                                       v
+                    (Creates or deletes HabitLog with DB Unique Index)
+                                       |
+                                       v
+                      {Turbo Stream replacement updates UI state}
+```
