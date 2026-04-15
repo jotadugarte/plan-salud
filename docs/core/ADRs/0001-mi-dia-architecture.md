@@ -10,6 +10,8 @@ La transición del "Calendario" original en HTML estático a una plataforma Rail
 3. **Catálogo Seeded (Read-Only):** En esta versión inicial (v1), los hábitos disponibles existen de forma global en la base de datos (seeded rows). Hemos evitado deliberadamente agregar un CRUD de administración de hábitos personalizados por usuario para mantener el alcance bajo control.
 4. **Respuesta Rápida (Optimización):** Se descartan las peticiones asíncronas lentas. Los toggles de hábitos envían una solicitud y retornan una respuesta de reemplazo `Turbo Stream` para actualizar la vista de forma casi instantánea, conservando el scroll sin JavaScript extra, manteniendo así un backend predominantemente en HTML.
 
+5. **Navegación Turbo Frame con Query Param Bookmarkable:** La navegación día-a-día y semana-a-semana se implementa mediante Turbo Frames que envían `GET /mi_dia?date=YYYY-MM-DD` al servidor. Se rechazó la alternativa de JS custom (estado local en Stimulus) porque pierda la capacidad de bookmark y compartir el URL. El servidor calcula la semana calendario (lun–dom) que contiene la fecha seleccionada; el carrusel de días y el de semana se sincronizan automáticamente sin estado en el cliente.
+
 ## Consecuencias
 - La rigidez del catálogo global de hábitos mantendrá los requisitos mínimos, pero deberemos ampliar la arquitectura global si el negocio exige rutinas extremadamente personalizadas por usuario.
 - El acoplamiento explícito a SQLite Unique Indexes significa la resolución absoluta (no "suave") de logs de hábitos duplicados, requiriendo el uso de validaciones como `ActiveRecord::RecordNotUnique` si por alguna pérdida de conexión el Turbo Stream reenvía *POSTs*.

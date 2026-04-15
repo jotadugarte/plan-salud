@@ -24,16 +24,38 @@ Visualizing key entity lifecycles and side-effects.
                  [Saved to DB]
 ```
 
-## 2. Habit Logging Lifecycle (Mi Día Dashboard)
+## 2. Mi Día Navigation Lifecycle (Turbo Frame Carousel)
+
+```text
+[User clicks day/week arrow] -> {Turbo Frame GET /mi_dia?date=YYYY-MM-DD}
+                                       |
+                                       v
+                    (MiDiaController#index parses date param)
+                    (Defaults to Date.current in user.timezone)
+                                       |
+                                       v
+                    (Calculates week: Monday..Sunday of selected date)
+                    (Loads Habits + HabitLogs for selected date)
+                    (Sets readonly_day = selected_date > Date.current)
+                                       |
+                                       v
+                 {Turbo Frame replaces #mi_dia — bookmarkable URL}
+```
+
+## 3. Habit Logging Lifecycle (Mi Día Dashboard)
 
 ```text
 [User toggles Habit checkbox] -> {HabitLogsController}
                                        |
                                        v
-                          (Validates `logged_on` <= Date.today)
+                     [Guard: logged_on > Date.current? → 403 Forbidden]
+                                       |
+                                       v
+                          (Validates ownership via Current.user)
                                        |
                                        v
                     (Creates or deletes HabitLog with DB Unique Index)
+                    (ActiveRecord::RecordNotUnique rescued on double-POST)
                                        |
                                        v
                       {Turbo Stream replacement updates UI state}

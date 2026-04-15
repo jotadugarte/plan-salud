@@ -128,12 +128,15 @@ The `docs/` folder is authoritative. Consult these files before implementing fea
 6. **Stable per-entity randomization:** When a collection must be displayed in a randomized but stable order for a given entity (e.g. same evaluator always sees the same question sequence), use `Array#shuffle(random: Random.new(entity.id))`. Always sort the collection by `id` first to guarantee a deterministic pre-shuffle input — without this, the shuffle output is not reproducible across Ruby versions or AR query order changes.
 7. **PostgreSQL boolean comparisons in migrations:** In raw SQL within `execute(<<-SQL)` blocks, NEVER compare boolean columns using integer literals (`= 1`, `= 0`). PostgreSQL requires `= TRUE` / `= FALSE`. SQLite silently coerces integers to booleans, masking this bug locally. Always use `= TRUE` or `= FALSE` in migration SQL.
 8. **Value Objects for Domain Telemetry:** Always encapsulate physiological telemetry (e.g., Weight, Measurement) and strict business identifiers (e.g., Role, Timezone) into dedicated Value Object classes instead of allowing them to flow as native primitive types (Strings, Floats, Integers) in Models or Controllers. This ensures fail-fast assertions at the domain edges.
+9. **Timezone-Safe Date Arithmetic:** In any domain logic that compares or calculates against "today", ALWAYS use `Date.current` scoped to the user's timezone (e.g. `Time.current.in_time_zone(current_user.timezone).to_date`). NEVER use `Date.today` or `Time.now.to_date` — they use the server timezone and will produce wrong results for users in different timezones.
+10. **Idempotent Catalog Seeds:** Seeds for global catalog models (e.g. `Habit`, `Phase`, `Exercise`) MUST be idempotent. Use `Model.find_or_create_by!(key: attrs[:key]) { |m| m.attr = val }` — the block executes only on creation, never on find, guaranteeing safe re-runs in all environments.
 
 # TESTING (RSpec)
 1. **Structure:** Arrange, Act, Assert.
 2. **Performance:** Use `build_stubbed` over `create` where possible. **Exception:** Do NOT use `build_stubbed` on factories whose association blocks call `create(...)` internally (e.g. a `behavior_level` block that does `create(:behavior_level, ...)`). `build_stubbed` stubs all DB calls and will raise `ActiveRecord::InvalidForeignKey` when an association block attempts a real `create`. Use `build` instead — it resolves associations in memory while still allowing factory DB-side lookups.
 3. **System Tests:** Use Capybara for Hotwire interactions.
 4. **No Private Testing:** Do NOT test private methods directly (`send`, `instance_eval`). Test the public interface or extract the logic to a Service Object or Value Object. See `docs/core/testing_private_methods_in_rails.md`.
+5. **Turbo Stream controller tests:** When testing a controller action that responds with `turbo_stream`, pass `as: :turbo_stream` in the request (e.g. `post habit_logs_url, params: {...}, as: :turbo_stream`). Without this, the `respond_to` block will not match and the test will silently receive a redirect or blank response instead of the expected stream.
 
 # INTERNATIONALIZATION (i18n) PROTOCOL
 - **Strict Prohibition:** NEVER leave hardcoded strings in Controllers, Models, Helpers, Mailers, or Views.
@@ -169,6 +172,7 @@ The `docs/` folder is authoritative. Consult these files before implementing fea
 - **Frame IDs:** Ensure `turbo_frame_tag` IDs match the backend response exactly.
 - **Efficiency:** Prefer **Turbo Streams** (append/prepend/replace) over full **Turbo Frame** reloads whenever possible.
 - **"Div Soup":** Avoid wrapping Turbo Frames in unnecessary `<div>` tags unless strictly required for layout.
+- **Turbo Stream partial IDs:** DOM element IDs targeted by `turbo_stream.replace` MUST follow the pattern `"#{model_name}_#{record.id}"` (e.g. `"habit_42"`). Never use hardcoded or position-based IDs — this ensures replacements are idempotent and do not collide between records.
 
 ## 4. Service & Query Objects
 - **Controller Logic:** If a Controller action contains complex filtering or business logic, extract it to a **Service Object** immediately (e.g., `AreaReportService`).
