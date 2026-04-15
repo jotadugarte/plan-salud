@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_14_040000) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_15_050001) do
   create_table "exercises", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "default_reps", null: false
@@ -21,6 +21,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_040000) do
     t.string "name", null: false
     t.json "tags"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "habit_logs", force: :cascade do |t|
+    t.boolean "completed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.integer "habit_id", null: false
+    t.date "logged_on", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["habit_id"], name: "index_habit_logs_on_habit_id"
+    t.index ["user_id", "habit_id", "logged_on"], name: "index_habit_logs_on_user_id_and_habit_id_and_logged_on", unique: true
+    t.index ["user_id"], name: "index_habit_logs_on_user_id"
+  end
+
+  create_table "habits", force: :cascade do |t|
+    t.string "category", null: false
+    t.datetime "created_at", null: false
+    t.string "key", null: false
+    t.string "name", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_habits_on_key", unique: true
   end
 
   create_table "phases", force: :cascade do |t|
@@ -35,6 +57,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_040000) do
     t.datetime "created_at", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
+    t.date "plan_started_at"
     t.string "role", default: "user", null: false
     t.string "timezone", null: false
     t.datetime "updated_at", null: false
@@ -53,6 +76,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_040000) do
     t.index ["user_id"], name: "index_workout_logs_on_user_id"
   end
 
+  add_foreign_key "habit_logs", "habits"
+  add_foreign_key "habit_logs", "users"
   add_foreign_key "workout_logs", "exercises"
   add_foreign_key "workout_logs", "users"
 end

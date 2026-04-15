@@ -1,0 +1,25 @@
+<%# [REQ-MDIA-005] Habit row — used by turbo_stream replace on toggle %>
+<div id="habit_<%= habit.id %>"
+     class="habit-row<%= ' completed' if completed %><%= ' readonly' if readonly_day %>">
+  <% if readonly_day %>
+    <div class="habit-disabled-row">
+      <span class="habit-check-icon"><%= "✓" if completed %></span>
+      <span class="habit-name"><%= habit.name %></span>
+    </div>
+  <% elsif completed && log_id %>
+    <%= button_to habit_log_path(log_id), method: :delete,
+          class: "habit-toggle-btn",
+          form: { "data-turbo-stream": true } do %>
+      <span class="habit-check-icon">✓</span>
+      <span class="habit-name"><%= habit.name %></span>
+    <% end %>
+  <% else %>
+    <%= button_to habit_logs_path,
+          params: { habit_log: { habit_id: habit.id, logged_on: Date.today } },
+          class: "habit-toggle-btn",
+          form: { "data-turbo-stream": true } do %>
+      <span class="habit-check-icon"></span>
+      <span class="habit-name"><%= habit.name %></span>
+    <% end %>
+  <% end %>
+</div>

@@ -48,7 +48,7 @@
 
   <!-- MAIN NAV -->
     <nav class="main-nav">
-    <button class="main-nav-btn active" onclick="showMain('calendario',this)">📅 Calendario</button>
+    <%= link_to mi_dia_path, class: "main-nav-btn#{request.path == mi_dia_path ? ' active' : ''}" do %>📅 Mi Día<% end %>
     <button class="main-nav-btn" onclick="showMain('salud',this)">❤️ Salud</button>
     <button class="main-nav-btn" onclick="showMain('habitos',this)">🌿 Hábitos</button>
     <button class="main-nav-btn" onclick="showMain('menu',this)">🍽️ Menú</button>
@@ -56,6 +56,7 @@
     <button class="main-nav-btn" onclick="showMain('compras',this)">🛒 Compras</button>
     <button class="main-nav-btn" onclick="showMain('ejercicio',this)">🏋️ Ejercicio</button>
   </nav>
+
     <div class="content">
       <%= yield %>
     </div>

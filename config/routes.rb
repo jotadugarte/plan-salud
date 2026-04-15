@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   end
 
   get "dashboard", to: "dashboard#index"
+  get "mi_dia",    to: "mi_dia#index"
+  resources :habit_logs, only: [ :create, :destroy ]
   root "dashboard#index"
+
 end

@@ -801,4 +801,252 @@
       font-size: 12px;
       margin-top: 3rem
     }
-  
+
+    /* ===== MI DÍA ===== */
+
+    /* Navigator */
+    .day-navigator { margin-bottom: 1.5rem; }
+
+    .week-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: .75rem;
+    }
+
+    .week-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text2);
+      text-align: center;
+    }
+
+    .nav-arrow {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--surface2);
+      color: var(--g900);
+      font-size: 18px;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .nav-arrow:hover {
+      background: var(--g100);
+      color: var(--g600);
+      box-shadow: 0 4px 12px rgba(107, 66, 244, 0.15);
+    }
+
+    /* Day pills */
+    .day-pills {
+      display: flex;
+      gap: 5px;
+      justify-content: space-between;
+      margin-bottom: .75rem;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .day-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: 12px;
+      text-decoration: none;
+      background: var(--surface2);
+      color: var(--text2);
+      min-width: 40px;
+      flex: 1;
+      transition: all var(--transition-fast);
+    }
+    .day-pill:hover { background: var(--g100); color: var(--g900); }
+    .day-pill.active {
+      background: var(--g600);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(107, 66, 244, 0.3);
+    }
+    .day-pill.future { opacity: .55; }
+    .day-pill-name { font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .day-pill-num  { font-size: 16px; font-weight: 700; margin-top: 2px; }
+
+    /* Selected day headline */
+    .selected-day-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: .5rem;
+    }
+
+    .selected-day-label {
+      font-family: 'Lora', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text);
+      text-align: center;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+
+    .today-badge {
+      background: var(--g600);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    /* Progress bar */
+    .habit-progress-bar {
+      height: 6px;
+      background: var(--surface2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .habit-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--g400), var(--g600));
+      border-radius: 3px;
+      transition: width .4s ease;
+    }
+
+    /* Habit groups */
+    .habit-group { margin-bottom: 1.25rem; }
+
+    .habit-group-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: .5rem;
+    }
+    .cat-food      { background: var(--cat-food-bg);      color: var(--cat-food); }
+    .cat-health    { background: var(--cat-health-bg);    color: var(--cat-health); }
+    .cat-emotional { background: var(--cat-emotional-bg); color: var(--cat-emotional); }
+
+    /* Habit row */
+    .habit-row {
+      border-radius: 10px;
+      margin-bottom: 4px;
+      overflow: hidden;
+    }
+    .habit-row.readonly { opacity: .55; }
+
+    .habit-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: .85rem 1rem;
+      background: var(--surface2);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: all var(--transition-fast);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+    }
+    .habit-toggle-btn:hover {
+      background: var(--g100);
+      box-shadow: 0 4px 12px rgba(46, 23, 96, 0.06);
+    }
+    .habit-toggle-btn:active { transform: scale(0.99); }
+
+    .habit-row.completed .habit-toggle-btn {
+      background: var(--g100);
+    }
+
+    .habit-check-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--g600);
+      background: var(--surface);
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+    }
+    .habit-row.completed .habit-check-icon {
+      background: var(--g600);
+      border-color: var(--g600);
+      color: #fff;
+    }
+
+    .habit-name { flex: 1; font-size: 14px; font-weight: 500; color: var(--text); }
+    .habit-row.completed .habit-name { color: var(--text2); text-decoration: line-through; }
+
+    .habit-disabled-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: .85rem 1rem;
+      border-radius: 10px;
+      background: var(--surface2);
+    }
+
+    /* Accordions */
+    .mi-dia-accordions { margin-top: 2rem; }
+
+    .mi-dia-accordion {
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: 0 4px 16px rgba(46, 23, 96, 0.04);
+    }
+
+    .mi-dia-accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      list-style: none;
+      transition: background var(--transition-fast);
+      user-select: none;
+    }
+    .mi-dia-accordion-header:hover { background: var(--surface2); }
+    .mi-dia-accordion-header::marker,
+    .mi-dia-accordion-header::-webkit-details-marker { display: none; }
+
+    .accordion-week {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .mi-dia-accordion-body {
+      border-top: 1px solid var(--border);
+      padding: 1.25rem;
+    }

@@ -1,0 +1,109 @@
+<% content_for :title, "Mi Día — Plan Integral de Salud" %>
+
+<%# [REQ-MDIA-004] Full "Mi Día" view — carrusel navigation + habits + accordions %>
+<%= turbo_frame_tag "mi_dia" do %>
+  <div class="mi-dia">
+
+    <%# ===== NAVEGADOR ===== %>
+    <div class="day-navigator">
+
+      <%# Fila semana %>
+      <div class="week-nav-row">
+        <%= link_to mi_dia_path(date: (@week_start - 1.day).to_s),
+              class: "nav-arrow", "data-turbo-frame": "mi_dia", title: "Semana anterior" do %>‹<% end %>
+        <span class="week-label">
+          Semana del <%= format_short_date(@week_start) %> al <%= format_short_date(@week_end) %>
+        </span>
+        <%= link_to mi_dia_path(date: (@week_end + 1.day).to_s),
+              class: "nav-arrow", "data-turbo-frame": "mi_dia", title: "Semana siguiente" do %>›<% end %>
+      </div>
+
+      <%# Pills de días %>
+      <div class="day-pills">
+        <% @week_dates.each do |d| %>
+          <%= link_to mi_dia_path(date: d.to_s),
+                class: "day-pill#{d == @selected_date ? ' active' : ''}#{d > Date.today ? ' future' : ''}",
+                "data-turbo-frame": "mi_dia" do %>
+            <span class="day-pill-name"><%= spanish_day_short(d) %></span>
+            <span class="day-pill-num"><%= d.day %></span>
+          <% end %>
+        <% end %>
+      </div>
+
+      <%# Día seleccionado con flechas %>
+      <div class="selected-day-row">
+        <%= link_to mi_dia_path(date: (@selected_date - 1.day).to_s),
+              class: "nav-arrow", "data-turbo-frame": "mi_dia", title: "Día anterior" do %>‹<% end %>
+        <h2 class="selected-day-label">
+          <% if @selected_date == Date.today %>
+            <span class="today-badge">Hoy</span>
+          <% end %>
+          <%= spanish_day_long(@selected_date) %>,
+          <%= @selected_date.day %> de <%= spanish_month(@selected_date) %>
+        </h2>
+        <%= link_to mi_dia_path(date: (@selected_date + 1.day).to_s),
+              class: "nav-arrow", "data-turbo-frame": "mi_dia", title: "Día siguiente" do %>›<% end %>
+      </div>
+    </div>
+
+    <% if @readonly_day %>
+      <div class="info-box" style="margin-bottom:1.25rem;">
+        📅 Este día aún no ha llegado — podés consultar el plan pero no registrar hábitos.
+      </div>
+    <% end %>
+
+    <%# ===== HÁBITOS ===== %>
+    <div class="section-title" style="margin-bottom:.25rem;">Mis Hábitos</div>
+    <% completed_count = @habits_with_status.count { |h| h[:completed] } %>
+    <div class="section-sub"><%= completed_count %>/<%= @habits_with_status.size %> completados</div>
+
+    <% progress_pct = @habits_with_status.empty? ? 0 : (completed_count.to_f / @habits_with_status.size * 100).round %>
+    <div class="habit-progress-bar" style="margin-bottom:1.5rem;">
+      <div class="habit-progress-fill" style="width:<%= progress_pct %>%"></div>
+    </div>
+
+    <% grouped = @habits_with_status.group_by { |h| h[:habit].category } %>
+    <% Habit::CATEGORIES.each do |category| %>
+      <% items = grouped[category] %>
+      <% next if items.blank? %>
+      <% config = habit_category_config(category) %>
+      <div class="habit-group">
+        <div class="habit-group-label cat-<%= config[:color] %>">
+          <span><%= config[:icon] %></span>
+          <%= config[:label] %>
+        </div>
+        <% items.each do |item| %>
+          <%= render partial: "mi_dia/habit",
+                     locals: { habit:       item[:habit],
+                               completed:   item[:completed],
+                               log_id:      item[:log_id],
+                               readonly_day: @readonly_day } %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%# ===== ACORDEONES ===== %>
+    <div class="mi-dia-accordions">
+      <details class="mi-dia-accordion">
+        <summary class="mi-dia-accordion-header">
+          <span>🍽️ Menú de la semana</span>
+          <span class="accordion-week"><%= format_short_date(@week_start) %> – <%= format_short_date(@week_end) %></span>
+        </summary>
+        <div class="mi-dia-accordion-body">
+          <%= render partial: "dashboard/menu" %>
+        </div>
+      </details>
+
+      <details class="mi-dia-accordion">
+        <summary class="mi-dia-accordion-header">
+          <span>🏋️ Ejercicio de la semana</span>
+          <span class="accordion-week"><%= format_short_date(@week_start) %> – <%= format_short_date(@week_end) %></span>
+        </summary>
+        <div class="mi-dia-accordion-body">
+          <%= render partial: "dashboard/ejercicio" %>
+        </div>
+      </details>
+    </div>
+
+  </div>
+<% end %>
