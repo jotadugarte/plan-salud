@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- "Mi Día" dashboard log tracking for daily user habits.
 - Rails 8 application initialized with SQLite database and Hotwire (Turbo/Stimulus).
 - Core domain models including `User`, `Phase`, `Exercise`, `WorkoutLog` with Data Validation and Value Object encapsulations (`Role`, `Timezone`).
 - Devise-style custom authentication flow with timezone enforcement and role-based policies using `Current.user`.

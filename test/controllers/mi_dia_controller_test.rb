@@ -13,21 +13,21 @@ class MiDiaControllerTest < ActionDispatch::IntegrationTest
 
   # [REQ-MDIA-004]
   test "returns 200 for today (no date param)" do
-    post session_url, params: { email: @user.email, password: "pwd" }
+    log_in(@user)
     get mi_dia_url
     assert_response :success
   end
 
   # [REQ-MDIA-004]
   test "returns 200 for a future date (read-only)" do
-    post session_url, params: { email: @user.email, password: "pwd" }
+    log_in(@user)
     get mi_dia_url, params: { date: "2099-01-01" }
     assert_response :success
   end
 
   # [REQ-MDIA-004]
   test "returns 200 for a past date" do
-    post session_url, params: { email: @user.email, password: "pwd" }
+    log_in(@user)
     get mi_dia_url, params: { date: "2026-01-01" }
     assert_response :success
   end
