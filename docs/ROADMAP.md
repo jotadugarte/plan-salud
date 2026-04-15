@@ -9,6 +9,7 @@ Things done and things left to do. Update this when finishing branches; use `roa
 ## Done
 - [x] Estandarización de interfaz (Neumorfismo Responsivo) — 2026-04-11
 - [x] Migrate HTML App to Rails + Hotwire + SQLite — 2026-04-14
+- [x] Vista "Mi Día" — hábitos diarios, carrusel de navegación, acordeones — 2026-04-14
 
 ## In Progress
 *(No items currently in progress)*
@@ -17,7 +18,10 @@ Things done and things left to do. Update this when finishing branches; use `roa
 *(Add pending items here)*
 
 ## Backlog
-*(Add backlog items here)*
+- [ ] Perfil de usuario: configurar plan_started_at y timezone — Depends on: Mi Día
+- [ ] CRUD de Hábitos por usuario (crear, eliminar) con plantillas — Depends on: Mi Día
+- [ ] MealLog: registro de adherencia a comidas — Depends on: Mi Día
+
 
 <!-- 
 Example formats:
